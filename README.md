@@ -6,3 +6,5 @@ A react app for viewing open data sets to make better decions related to traffic
 
 > npm install
 > npm start
+
+### Server runs on localhost:8080
