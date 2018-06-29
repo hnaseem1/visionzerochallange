@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
-class Filters extends Component {
-  constructor(props) {
-    super(props)
-  }
-}
+const Filters = (props) => {
+  return(
+    <div>
+      Filters
+    </div>
+  );
+};
 
-export default filters;
+export default Filters;

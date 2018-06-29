@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
-class Map extends Component {
-  constructor(props) {
-    super(props)
-  }
-}
+const Map = (props) => {
+  return(
+    <div>
+      maps
+    </div>
+  );
+};
 
-export default map;
+export default Map;

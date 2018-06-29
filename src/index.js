@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import map from './components/map';
-import filter from './components/filters';
+import Map from './components/map';
+import Filters from './components/filters';
 
 
 
