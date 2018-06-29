@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class filters extends Component {
-  constructor() {
+class Filters extends Component {
+  constructor(props) {
     super(props)
   }
 }

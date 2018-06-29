@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-class map extends Component {
-  constructor() {
+class Map extends Component {
+  constructor(props) {
     super(props)
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-// import Componenet1 from './components/component1';
+import map from './components/map';
+import filter from './components/filters';
 
 
 
@@ -16,14 +17,14 @@ class App extends Component {
     // }
   }
 
-  // render() {
-  //   return (
-  //     <div>
-  //       <Component1 />
-  //       <Component2 />
-  //     </div>
-  //   );
-  // }
+  render() {
+    return (
+      <div>
+        <Map />
+        <Filters />
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(<App/>, parentNode);
