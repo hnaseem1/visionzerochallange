@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-// import Componenet1 from './components/component1';
+import Map from './components/map';
+import Filters from './components/filters';
 
 
 
@@ -16,14 +17,20 @@ class App extends Component {
     // }
   }
 
-  // render() {
-  //   return (
-  //     <div>
-  //       <Component1 />
-  //       <Component2 />
-  //     </div>
-  //   );
-  // }
+  render() {
+    return (
+      <div>
+        <Map
+          isMarkerShown
+          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+          loadingElement={<div style={{ height: `100%` }} />}
+          containerElement={<div style={{ height: `400px` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
+        />
+        <Filters />
+      </div>
+    );
+  }
 }
 
 ReactDOM.render(<App/>, parentNode);
