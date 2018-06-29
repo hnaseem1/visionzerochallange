@@ -6,4 +6,4 @@ class filters extends Component {
   }
 }
 
-export default map;
+export default filters;
