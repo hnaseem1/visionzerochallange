@@ -1,0 +1,23 @@
+.header {
+  background: #000;
+  color: #ccc;
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+nav {
+  align-self: center;
+}
+
+.container {
+  padding: 2em;
+}
+
+footer {
+  background: #000;
+  color: #ccc;
+  bottom: 0;
+  position: fixed;
+  text-align: center;
+  width: 100%;
+}
