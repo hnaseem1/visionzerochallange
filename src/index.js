@@ -27,6 +27,7 @@ class App extends Component {
     return (
       <div>
         <Map
+          data={this.state.data}
           isMarkerShown
           googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
