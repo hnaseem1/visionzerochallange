@@ -8,7 +8,51 @@ locations = data.features
 
   initMap();
 
+  //----------------------------- filters ----------------------------- //
+  var pedestriansFilter = document.querySelector("input[value='pedestrians']");
+  var cyclistsFilter    = document.querySelector("input[value='cyclists']");
+  var injuriesFilter    = document.querySelector("input[value='injuries']");
+  var fatalitiesFilter  = document.querySelector("input[value='fatalities']");
+  var resetFilter        = document.getElementById('reset_filters');
+
+  // pedestrians
+  pedestriansFilter.addEventListener('change', function() {
+    if(this.checked) {
+      console.log('pedestrians filter clicked')
+    } else {
+      console.log('pedestrians filter not clicked')
+    }
   })
+  // cyclists
+  cyclistsFilter.addEventListener('change', function() {
+    if(this.checked) {
+      console.log('cyclists filter clicked')
+    } else {
+      console.log('cyclists filter not clicked')
+    }
+  })
+  // injuries
+  injuriesFilter.addEventListener('change', function() {
+    if(this.checked) {
+      console.log('injuries filter clicked')
+    } else {
+      console.log('injuries filter not clicked')
+    }
+  })
+  // fatalities
+  fatalitiesFilter.addEventListener('change', function() {
+    if(this.checked) {
+      console.log('fatalities filter clicked')
+    } else {
+      console.log('fatalities filter not clicked')
+    }
+  })
+  // reset filter
+  resetFilter.addEventListener('click', function() {
+    console.log('filter reset')
+  })
+
+})
 
 
 function initMap() {
