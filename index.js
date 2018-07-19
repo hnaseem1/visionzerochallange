@@ -4,8 +4,7 @@ var response = $.ajax({
   dataType: 'json'
 }).done(function(data) {
 
-locations = data.features
-
+  reset(data);
   initMap();
 
   //----------------------------- filters ----------------------------- //
@@ -77,3 +76,49 @@ function initMap() {
   var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
   }
+
+// ======================== Filter Functions ==========================
+
+// pedestrians
+
+function pedestrian(data) {
+  location = data.features.map(function(feature) {
+    if (feature.attributes.PEDESTRIAN === 'Yes') {
+      return feature
+    }
+  })
+}
+
+// cyclist
+
+function cyclists(data) {
+  location = data.features.map(function(feature) {
+    if (feature.attributes.CYCLIST === 'Yes') {
+      return feature
+    }
+  })
+}
+
+// injuries
+
+function injuries(data) {
+  location = data.features.map(function(feature) {
+    if (feature.attributes.INJURY === 'Yes') {
+      return feature
+    }
+  })
+}
+
+// fatalities
+
+function fatalities(data) {
+  location = data.features.map(function(feature) {
+    if (feature.attributes.FATAL_NO > 0) {
+      return feature
+    }
+  })
+}
+
+function reset(data) {
+  locations = data.features
+}
