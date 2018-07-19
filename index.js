@@ -4,50 +4,19 @@ var response = $.ajax({
   dataType: 'json'
 }).done(function(data) {
 
-  // console.log(data.features);
-  // work in here
-  console.log('start');
+locations = data.features
 
-  var locations = data.features.map(function(feature) {
-    var obj = {lat: feature.geometry.x, lng: feature.geometry.y}
-    return obj
-  })
-
-  console.log(locations);
-
-  initMap(locations);
-
-
-  console.log('finished')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  initMap();
 
   })
 
 
-function initMap(locations) {
+function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 3,
           center: {lat: 43.0391667, lng: -79.525}
         });
-
-        // Create an array of alphabetical characters used to label the markers.
-  var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
         // Add some markers to the map.
         // Note: The code uses the JavaScript Array.prototype.map() method to
@@ -55,8 +24,7 @@ function initMap(locations) {
         // The map() method here has nothing to do with the Google Maps API.
   var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
-            position: location,
-            label: labels[i % labels.length]
+            position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE }
           });
         });
 
