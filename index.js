@@ -17,33 +17,43 @@ var response = $.ajax({
   // pedestrians
   pedestriansFilter.addEventListener('change', function() {
     if(this.checked) {
-      console.log('pedestrians filter clicked')
+      pedestrian(data)
+      initMap();
+      console.log(locations);
     } else {
-      console.log('pedestrians filter not clicked')
+      console.log(locations);
+      reset(data)
+      initMap();
     }
   })
   // cyclists
   cyclistsFilter.addEventListener('change', function() {
     if(this.checked) {
-      console.log('cyclists filter clicked')
+      cyclists(data);
+      initMap();
     } else {
-      console.log('cyclists filter not clicked')
+      reset(data);
+      initMap();
     }
   })
   // injuries
   injuriesFilter.addEventListener('change', function() {
     if(this.checked) {
-      console.log('injuries filter clicked')
+      injuries(data);
+      initMap();
     } else {
-      console.log('injuries filter not clicked')
+      reset(data);
+      initMap();
     }
   })
   // fatalities
   fatalitiesFilter.addEventListener('change', function() {
     if(this.checked) {
-      console.log('fatalities filter clicked')
+      fatalities(data);
+      initMap();
     } else {
-      console.log('fatalities filter not clicked')
+      reset(data);
+      initMap();
     }
   })
   // reset filter
@@ -82,40 +92,32 @@ function initMap() {
 // pedestrians
 
 function pedestrian(data) {
-  location = data.features.map(function(feature) {
-    if (feature.attributes.PEDESTRIAN === 'Yes') {
-      return feature
-    }
+  locations = data.features.filter(function(feature) {
+      return feature.attributes.PEDESTRIAN === 'Yes'
   })
 }
 
 // cyclist
 
 function cyclists(data) {
-  location = data.features.map(function(feature) {
-    if (feature.attributes.CYCLIST === 'Yes') {
-      return feature
-    }
+  locations = data.features.filter(function(feature) {
+      return feature.attributes.CYCLIST === 'Yes'
   })
 }
 
 // injuries
 
 function injuries(data) {
-  location = data.features.map(function(feature) {
-    if (feature.attributes.INJURY === 'Yes') {
-      return feature
-    }
+  locations = data.features.filter(function(feature) {
+      return feature.attributes.INJURY !== ' '
   })
 }
 
 // fatalities
 
 function fatalities(data) {
-  location = data.features.map(function(feature) {
-    if (feature.attributes.FATAL_NO > 0) {
-      return feature
-    }
+  locations = data.features.filter(function(feature) {
+    return feature.attributes.FATAL_NO > 0
   })
 }
 
