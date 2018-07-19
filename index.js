@@ -14,8 +14,8 @@ locations = data.features
 function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 3,
-          center: {lat: 43.0391667, lng: -79.525}
+          zoom: 11,
+          center: {lat: 43.713783, lng: -79.385296}
         });
 
         // Add some markers to the map.
@@ -28,7 +28,7 @@ function initMap() {
           });
         });
 
-  
+
         // Add a marker clusterer to manage the markers.
   var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
