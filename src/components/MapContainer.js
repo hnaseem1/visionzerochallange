@@ -12,9 +12,32 @@ export default class MapContainer extends Component {
   }
 }
 
+  only_pedestrians() {
+    const data = this.state.data.map( feature => {
+      if (feature.attributes.PEDESTRIAN === 'Yes') {
+        return feature
+      }
+    this.setState({
+      data: data
+    })
+    }
+
+    )
+  }
+
+  add_marker() {
+    this.state.data.forEach( features => { // iterate through locations saved in state
+      const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+        position: {lat: features.attributes.LATITUDE, lng: features.attributes.LONGITUDE}, // sets position of marker to specified location
+        map: this.map, // sets markers to appear on the map we just created on line 35
+        title: features.attributes.name // the title of the marker is set to the name of the location
+      });
+    })
+  }
+
   componentDidMount() {
 
-    fetch('https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=Index_,DATE,LATITUDE,LONGITUDE,STREET1,STREET2&outSR=4326&f=json')
+    fetch('https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=YEAR,DATE,TIME,Hour,STREET1,STREET2,OFFSET,ROAD_CLASS,District,LATITUDE,LONGITUDE,LOCCOORD,ACCLOC,TRAFFCTL,VISIBILITY,LIGHT,RDSFCOND,ACCLASS,IMPACTYPE,INVTYPE,INVAGE,INJURY,FATAL_NO,INITDIR,VEHTYPE,MANOEUVER,DRIVACT,DRIVCOND,PEDTYPE,PEDACT,PEDCOND,CYCLISTYPE,CYCACT,CYCCOND,PEDESTRIAN,CYCLIST,SPEEDING,REDLIGHT,ALCOHOL,DISABILITY,Division,Ward_Name,Ward_ID,Hood_ID,Hood_Name,FID,ACCNUM,Index_,AG_DRIV&outSR=4326&f=json')
     .then((Response)=>Response.json())
     .then((findresponse)=>
   {
@@ -25,11 +48,14 @@ export default class MapContainer extends Component {
   })
 
     this.loadMap(); // call loadMap function to load the google map upon mounting the component
+
   }
 
 
   componentDidUpdate() {
+
     this.loadMap(); // call loadMap function to load the google map
+
   }
 
   loadMap() {
@@ -51,13 +77,8 @@ export default class MapContainer extends Component {
   // ==================
   // ADD MARKERS TO MAP
   // ==================
-      this.state.data.forEach( features => { // iterate through locations saved in state
-        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-          position: {lat: features.attributes.LATITUDE, lng: features.attributes.LONGITUDE}, // sets position of marker to specified location
-          map: this.map, // sets markers to appear on the map we just created on line 35
-          title: features.attributes.name // the title of the marker is set to the name of the location
-        });
-      })
+
+      this.add_marker();
 
     }
   }
@@ -72,6 +93,8 @@ export default class MapContainer extends Component {
       <div ref="map" style={style}>
         loading map...
       </div>
+
+
     )
   }
 }
