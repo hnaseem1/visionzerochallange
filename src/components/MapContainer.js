@@ -4,17 +4,31 @@ import ReactDOM from 'react-dom'
 
 export default class MapContainer extends Component {
 
-  constructor()
+  constructor(props)
 {
-  super()
+  super(props)
   this.state={
+    isOpen: false,
     data:[]
   }
 }
 
+handleToggleOpen = () => {
+
+	this.setState({
+		isOpen: true
+	});
+}
+
+handleToggleClose = () => {
+	this.setState({
+		isOpen: false
+	});
+}
+
   componentDidMount() {
 
-    fetch('https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=Index_,DATE,LATITUDE,LONGITUDE,STREET1,STREET2&outSR=4326&f=json')
+    fetch('https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json')
     .then((Response)=>Response.json())
     .then((findresponse)=>
   {
@@ -23,7 +37,6 @@ export default class MapContainer extends Component {
       data:findresponse.features
     })
   })
-
     this.loadMap(); // call loadMap function to load the google map upon mounting the component
   }
 
@@ -55,10 +68,10 @@ export default class MapContainer extends Component {
         const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
           position: {lat: features.attributes.LATITUDE, lng: features.attributes.LONGITUDE}, // sets position of marker to specified location
           map: this.map, // sets markers to appear on the map we just created on line 35
-          title: features.attributes.name // the title of the marker is set to the name of the location
+          title: 'test', // the title of the marker is set to the name of the location
+          name: 'my test',
         });
       })
-
     }
   }
 
