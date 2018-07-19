@@ -17,11 +17,32 @@
         <a href="/">data</a>
       </nav>
     </header>
+
     <div class="container">
+
+      <div class="filters">
+      	<form>
+          <h2>Filters</h2>
+      		<div class="filter-criteria streetview-type">
+      			<h5>
+              <label><input type="checkbox" name="streetview" value="pedestrians" >Pedestrians</label>
+              <label><input type="checkbox" name="streetview" value="cyclists"    >Cyclists</label>
+            </h5>
+      		</div>
+          <div class="filter-criteria accident-type">
+      			<h5>
+              <label><input type="checkbox" name="accidents"  value="injuries"    >Injuries</label>
+              <label><input type="checkbox" name="accidents"  value="fatalities"  >Fatalities</label>
+            </h5>
+      		</div>
+          <button type="button" class="submit" id='reset_filters' name="button">Reset Filters</button>
+      	</form>
+      </div> <!-- filters -->
+
       <div id="map">
 
       </div>
-    </div>
+    </div> <!-- container -->
 
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
     </script>
