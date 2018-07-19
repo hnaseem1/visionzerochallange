@@ -1,3 +1,9 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .header {
   background: #000;
   color: #ccc;
@@ -5,11 +11,23 @@
   grid-template-columns: 70% 30%;
 }
 
+.logo {
+  padding: 0 1em;
+}
+
 nav {
   align-self: center;
 }
 
-.container {
+/* content has filter and map */
+.content {
+  display: grid;
+  grid-template-columns: 15% 85%;
+  grid-template-rows: 100%;
+  height: 100vh;
+}
+
+.filters {
   padding: 2em;
 }
 
