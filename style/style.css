@@ -1,3 +1,9 @@
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 .header {
   background: #000;
   color: #ccc;
@@ -9,13 +15,12 @@ nav {
   align-self: center;
 }
 
-.container {
+.content {
   padding: 2em;
   display: grid;
   grid-template-columns: 30% 70%;
   grid-template-rows: 100%;
   height: 80vh;
-  margin: 0;
 }
 
 footer {
