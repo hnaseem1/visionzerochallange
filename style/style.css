@@ -11,6 +11,10 @@ html {
   grid-template-columns: 70% 30%;
 }
 
+.logo {
+  padding: 0 1em;
+}
+
 nav {
   align-self: center;
 }
