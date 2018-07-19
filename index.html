@@ -2,6 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <title>VisionZero</title>
     <link rel="stylesheet" href="/style/style.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/48938155eb24b4ccdde09426066869504c6dab3c/dist/css/bootstrap.min.css">
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAq06l5RUVfib62IYRQacLc-KAy0XIWAVs"></script>
@@ -15,10 +17,22 @@
         <a href="/">data</a>
       </nav>
     </header>
-    <div class="container"></div>
+    <div class="container">
+      <div id="map">
+
+      </div>
+    </div>
+
+    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap">
+    </script>
+
+
     <footer>
       2018
     </footer>
   </body>
-  <script src="/bundle.js"></script>
+  <script src="/index.js"></script>
 </html>
