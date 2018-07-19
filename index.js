@@ -49,6 +49,10 @@ var response = $.ajax({
   // reset filter
   resetFilter.addEventListener('click', function() {
     console.log('filter reset')
+    pedestriansFilter.checked = false;
+    cyclistsFilter.checked    = false;
+    injuriesFilter.checked    = false;
+    fatalitiesFilter.checked  = false;
   })
 
 })
