@@ -82,10 +82,18 @@ function initMap() {
         // Note: The code uses the JavaScript Array.prototype.map() method to
         // create an array of markers based on a given "locations" array.
         // The map() method here has nothing to do with the Google Maps API.
+
+  var infoWin = new google.maps.InfoWindow();
+
   var markers = locations.map(function(location, i) {
-          return new google.maps.Marker({
+    var marker = new google.maps.Marker({
             position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE }
           });
+          google.maps.event.addListener(marker, 'click', function(evt) {
+            infoWin.setContent('testestestest');
+            infoWin.open(map, marker);
+          })
+          return marker;
         });
 
 
