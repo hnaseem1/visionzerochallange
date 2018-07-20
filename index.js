@@ -12,7 +12,8 @@ var response = $.ajax({
   var cyclistsFilter    = document.querySelector("input[value='cyclists']");
   var injuriesFilter    = document.querySelector("input[value='injuries']");
   var fatalitiesFilter  = document.querySelector("input[value='fatalities']");
-  var resetFilter        = document.getElementById('reset_filters');
+  var resetFilter       = document.getElementById('reset_filters');
+
 
   // pedestrians
   pedestriansFilter.addEventListener('change', function() {
@@ -65,6 +66,8 @@ var response = $.ajax({
     fatalitiesFilter.checked  = false;
   })
 
+  
+
 })
 
 
@@ -89,7 +92,25 @@ function initMap() {
         // Add a marker clusterer to manage the markers.
   var markerCluster = new MarkerClusterer(map, markers,
             {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+    var bikeLayer = new google.maps.BicyclingLayer();
+
+    var bikeRoute = document.getElementById('bike_route');
+    var bikeDisplayed = false
+
+    bikeRoute.addEventListener('click', function(e) {
+        e.preventDefault()
+        if (bikeDisplayed === false ) {
+            bikeLayer.setMap(map);
+            bikeDisplayed = true
+        }else {
+            bikeLayer.setMap(null);
+            bikeDisplayed = false
+        }
+    })
   }
+
+
 
 // ======================== Filter Functions ==========================
 
