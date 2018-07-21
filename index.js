@@ -66,7 +66,7 @@ var response = $.ajax({
     fatalitiesFilter.checked  = false;
   })
 
-  
+
 
 })
 
@@ -145,6 +145,14 @@ function fatalities(data) {
     return feature.attributes.FATAL_NO > 0
   })
 }
+
+function pedestrianAndCyclists(data) {
+  locations = data.features.filter(function(feature) {
+      return feature.attributes.PEDESTRIAN === 'Yes' && feature.attributes.CYCLIST === 'Yes'
+  })
+}
+
+// reset data
 
 function reset(data) {
   locations = data.features
