@@ -17,19 +17,60 @@ var response = $.ajax({
 
   // pedestrians
   pedestriansFilter.addEventListener('change', function() {
-    if(this.checked) {
-      pedestrian(data)
+    locations = []
+    if (this.checked && cyclistsFilter.checked === true && injuriesFilter.checked === true && fatalitiesFilter.checked === true) {
+      console.log('All filters clicked')
+      locations = []
+      pedestrians(data)
+      cyclists(data)
+      injuries(data)
+      fatalities(data)
       initMap();
-      console.log(locations);
+    } else if (this.checked && cyclistsFilter.checked === true) {
+      console.log('pedestrians and cyclists filters clicked')
+      pedestrians(data)
+      cyclists(data)
+      initMap();
+    } else if (this.checked && injuriesFilter.checked === true) {
+      pedestrians(data)
+      injuries(data)
+      initMap();
+    } else if(this.checked && fatalitiesFilter.checked === true) {
+      pedestrians(data)
+      fatalities()
+      initMap();
+    } else if (this.checked) {
+      pedestrians(data)
+      initMap();
     } else {
-      console.log(locations);
       reset(data)
       initMap();
     }
   })
   // cyclists
   cyclistsFilter.addEventListener('change', function() {
-    if(this.checked) {
+    locations = []
+    if (this.checked && pedestriansFilter.checked === true && injuriesFilter.checked === true && fatalitiesFilter.checked === true) {
+      console.log('All filters clicked')
+      pedestrians(data)
+      cyclists(data)
+      injuries(data)
+      fatalities(data)
+      initMap();
+    } else if (this.checked && pedestriansFilter.checked === true) {
+      cyclists(data)
+      pedestrians(data)
+      initMap();
+    } else if (this.cheched && injuriesFilter.checked === true) {
+      cyclists(data)
+      injuries(data)
+      initMap();
+    } else if (this.checked && fatalitiesFilter.checked === true) {
+      cyclists(data)
+      fatalities(data)
+      initMap();
+    } else if (this.checked) {
+      locations = []
       cyclists(data);
       initMap();
     } else {
@@ -39,7 +80,27 @@ var response = $.ajax({
   })
   // injuries
   injuriesFilter.addEventListener('change', function() {
-    if(this.checked) {
+    locations = []
+    if (this.checked && pedestriansFilter.checked === true && injuriesFilter.checked === true && fatalitiesFilter.checked === true) {
+      console.log('All filters clicked')
+      pedestrians(data)
+      cyclists(data)
+      injuries(data)
+      fatalities(data)
+      initMap();
+    } else if (this.checked && pedestriansFilter.checked === true) {
+      injuries(data)
+      pedestrians(data)
+      initMap();
+    } else if (this.cheched && cyclistsFilter.checked === true) {
+      injuries(data)
+      cyclists(data)
+      initMap();
+    } else if (this.checked && fatalitiesFilter.checked === true) {
+      injuries(data)
+      fatalities(data)
+      initMap();
+    } else if (this.checked) {
       injuries(data);
       initMap();
     } else {
@@ -49,7 +110,27 @@ var response = $.ajax({
   })
   // fatalities
   fatalitiesFilter.addEventListener('change', function() {
-    if(this.checked) {
+    locations = []
+    if (this.checked && pedestriansFilter.checked === true && injuriesFilter.checked === true && fatalitiesFilter.checked === true) {
+      console.log('All filters clicked')
+      pedestrians(data)
+      cyclists(data)
+      injuries(data)
+      fatalities(data)
+      initMap();
+    } else if (this.checked && pedestriansFilter.checked === true) {
+      fatalities(data)
+      pedestrians(data)
+      initMap();
+    } else if (this.cheched && cyclistsFilter.checked === true) {
+      fatalities(data)
+      cyclists(data)
+      initMap();
+    } else if (this.checked && injuriesFilter.checked === true) {
+      fatalities(data)
+      injuries(data)
+      initMap();
+    } else if (this.checked) {
       fatalities(data);
       initMap();
     } else {
@@ -65,8 +146,6 @@ var response = $.ajax({
     injuriesFilter.checked    = false;
     fatalitiesFilter.checked  = false;
   })
-
-
 
 })
 
@@ -116,39 +195,41 @@ function initMap() {
 
 // pedestrians
 
-function pedestrian(data) {
-  locations = data.features.filter(function(feature) {
-      return feature.attributes.PEDESTRIAN === 'Yes'
+function pedestrians(data) {
+  data.features.map(function(feature) {
+    if (feature.attributes.PEDESTRIAN === 'Yes') {
+      locations.push(feature)
+    }
   })
 }
 
-// cyclist
+// cyclists
 
 function cyclists(data) {
-  locations = data.features.filter(function(feature) {
-      return feature.attributes.CYCLIST === 'Yes'
+  data.features.map(function(feature) {
+    if (feature.attributes.CYCLIST === 'Yes') {
+      locations.push(feature)
+    }
   })
 }
 
 // injuries
 
 function injuries(data) {
-  locations = data.features.filter(function(feature) {
-      return feature.attributes.INJURY !== ' '
+  data.features.filter(function(feature) {
+    if (feature.attributes.INJURY !== ' ') {
+      locations.push(feature)
+    }
   })
 }
 
 // fatalities
 
 function fatalities(data) {
-  locations = data.features.filter(function(feature) {
-    return feature.attributes.FATAL_NO > 0
-  })
-}
-
-function pedestrianAndCyclists(data) {
-  locations = data.features.filter(function(feature) {
-      return feature.attributes.PEDESTRIAN === 'Yes' && feature.attributes.CYCLIST === 'Yes'
+  data.features.filter(function(feature) {
+    if (feature.attributes.FATAL_NO > 0) {
+      locations.push(feature)
+    }
   })
 }
 
