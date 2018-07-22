@@ -269,6 +269,21 @@ function initMap() {
 // pedestrians
 
 function pedestrians(data) {
+  if (cyclistsFilter.checked === true) {
+    cyclists(data)
+    initMap();
+  }
+
+  if (injuriesFilter.checked === true) {
+    injuries(data)
+    initMap();
+  }
+
+  if (fatalitiesFilter.checked === true) {
+    fatalities(data)
+    initMap();
+  }
+
   data.features.map(function(feature) {
     if (feature.attributes.PEDESTRIAN === 'Yes') {
       locations.push(feature)
@@ -279,6 +294,21 @@ function pedestrians(data) {
 // cyclists
 
 function cyclists(data) {
+  if (pedestriansFilter.checked === true) {
+    pedestrians(data)
+    initMap();
+  }
+
+  if (injuriesFilter.checked === true) {
+    injuries(data)
+    initMap();
+  }
+
+  if (fatalitiesFilter.checked === true) {
+    fatalities(data)
+    initMap();
+  }
+
   data.features.map(function(feature) {
     if (feature.attributes.CYCLIST === 'Yes') {
       locations.push(feature)
@@ -289,6 +319,21 @@ function cyclists(data) {
 // injuries
 
 function injuries(data) {
+  if (cyclistsFilter.checked === true) {
+    cyclists(data)
+    initMap();
+  }
+
+  if (injuriesFilter.checked === true) {
+    injuries(data)
+    initMap();
+  }
+
+  if (fatalitiesFilter.checked === true) {
+    fatalities(data)
+    initMap();
+  }
+
   data.features.map(function(feature) {
     if (feature.attributes.INJURY !== ' ') {
       locations.push(feature)
@@ -299,6 +344,21 @@ function injuries(data) {
 // fatalities
 
 function fatalities(data) {
+  if (pedestriansFilter.checked === true) {
+    fatalities(data)
+    initMap();
+  }
+
+  if (cyclistsFilter.checked === true) {
+    cyclists(data)
+    initMap();
+  }
+
+  if (injuriesFilter.checked === true) {
+    injuries(data)
+    initMap();
+  }
+
   data.features.map(function(feature) {
     if (feature.attributes.FATAL_NO > 0) {
       locations.push(feature)
