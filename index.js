@@ -8,11 +8,17 @@ var response = $.ajax({
   initMap();
 
   //----------------------------- filters ----------------------------- //
-  var pedestriansFilter = document.querySelector("input[value='pedestrians']");
-  var cyclistsFilter    = document.querySelector("input[value='cyclists']");
-  var motorcylesFilter    = document.querySelector("input[value='motorcyles']");
-  var motoristsFilter  = document.querySelector("input[value='motorists']");
-  var resetFilter       = document.getElementById('reset_filters');
+  var pedestriansFilter       = document.querySelector("input[value='pedestrians']");
+  var cyclistsFilter          = document.querySelector("input[value='cyclists']");
+  var motorcylesFilter        = document.querySelector("input[value='motorcyles']");
+  var motoristsFilter         = document.querySelector("input[value='motorists']");
+
+  var agressiveDrivingFilter  = document.querySelector("input[value='aggresive-driving']");
+  var alcoholFilter           = document.querySelector("input[value='alcohol']");
+  var speedingFilter          = document.querySelector("input[value='speeding']");
+  var ranRedLightFilter       = document.querySelector("input[value='ran-red-light']");
+
+  var resetFilter             = document.getElementById('reset_filters');
 
 
   // pedestrians
