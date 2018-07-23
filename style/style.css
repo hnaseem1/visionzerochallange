@@ -3,7 +3,7 @@ html {
 }
 
 body {
-  font-family: 'Lato', sans-serif !important;  
+  font-family: 'Lato', sans-serif !important;
   font-size: 20px;
   margin: 0;
   padding: 0;
@@ -28,6 +28,10 @@ nav {
   align-self: center;
 }
 
+nav a {
+  padding: 0 2.5em;
+}
+
 /* content has filter and map */
 .content {
   display: grid;
@@ -41,18 +45,16 @@ nav {
   padding: 1em 0.75em 0;
 }
 
+/* collisions, infrastructure, context */
 .tablinks {
   background: #a8bbff;
   border: none;
+  font-weight: 600;
   width: 32%;
 }
 
 .tablinks.active {
   background: #fff;
-}
-
-.tablinks:hover {
-
 }
 
 /* default view on collision tab*/
@@ -72,15 +74,16 @@ nav {
 .filter-title {
   background: #fff;
   font-size: 1em;
+  font-weight: 600;
   margin: 0;
-  padding: 0.5em;
+  padding: 0.5em 2em;
 }
 
 .filter-options {
   font-size: 0.8em;
   font-weight: normal;
   margin: 0;
-  padding-left: 0.25em;
+  padding-left: 2.5em;
 }
 
 footer {
