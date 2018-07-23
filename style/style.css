@@ -32,6 +32,11 @@ nav {
   height: 95vh;
 }
 
+/* default view on collision tab*/
+#infrastructure, #context {
+  display: none; 
+}
+
 .filters {
   /* padding: 2em; */
   background: #eeeeee;
