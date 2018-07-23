@@ -119,7 +119,7 @@ var response = $.ajax({
       initMap();
     }
   })
-  // injuries
+  // motorcycles
   motorcylesFilter.addEventListener('change', function() {
     locations = []
     if (!this.checked && cyclistsFilter.checked !== true && motorcylesFilter.checked !== true && motoristsFilter.checked !== true) {
@@ -167,7 +167,7 @@ var response = $.ajax({
       initMap();
     }
   })
-  // fatalities
+  // motorists
   motoristsFilter.addEventListener('change', function() {
     locations = []
     if (!this.checked && cyclistsFilter.checked !== true && motorcylesFilter.checked !== true && motoristsFilter.checked !== true) {
@@ -215,6 +215,52 @@ var response = $.ajax({
       initMap();
     }
   })
+
+  // aggressive driving
+  agressiveDrivingFilter.addEventListener('change', function() {
+    locations = []
+    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      reset(data)
+      initMap();
+    } else if (this.checked) {
+      aggressiveDriving(data);
+      initMap();
+    }
+  })
+  // alcohol
+  alcoholFilter.addEventListener('change', function() {
+    locations = []
+    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      reset(data)
+      initMap();
+    } else if (this.checked) {
+      alcohol(data);
+      initMap();
+    }
+  })
+  // speeding
+  speedingFilter.addEventListener('change', function() {
+    locations = []
+    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      reset(data)
+      initMap();
+    } else if (this.checked) {
+      speeding(data);
+      initMap();
+    }
+  })
+  // ran red light
+  ranRedLightFilter.addEventListener('change', function() {
+    locations = []
+    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      reset(data)
+      initMap();
+    } else if (this.checked) {
+      ranRedLight(data);
+      initMap();
+    }
+  })
+
   // reset filter
   resetFilter.addEventListener('click', function() {
     console.log('filter reset')
@@ -327,6 +373,46 @@ function motorcycles(data) {
 function motorists(data) {
   data.features.map(function(feature) {
     if (feature.attributes.AUTOMOBILE !== ' ') {
+      locations.push(feature)
+    }
+  })
+}
+
+// aggressive driving
+
+function aggressiveDriving(data) {
+  data.features.map(function(feature) {
+    if (feature.attributes.AG_DRIV !== ' ') {
+      locations.push(feature)
+    }
+  })
+}
+
+// alcohol
+
+function alcohol(data) {
+  data.features.map(function(feature) {
+    if (feature.attributes.ALCOHOL !== ' ') {
+      locations.push(feature)
+    }
+  })
+}
+
+// speeding
+
+function speeding(data) {
+  data.features.map(function(feature) {
+    if (feature.attributes.SPEEDING !== ' ') {
+      locations.push(feature)
+    }
+  })
+}
+
+// ran red light
+
+function ranRedLight(data) {
+  data.features.map(function(feature) {
+    if (feature.attributes.REDLIGHT !== ' ') {
       locations.push(feature)
     }
   })
