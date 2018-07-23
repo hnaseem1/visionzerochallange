@@ -6,6 +6,7 @@
     <title>VisionZero</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/48938155eb24b4ccdde09426066869504c6dab3c/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
 
@@ -24,17 +25,13 @@
 
       <div class="filters">
       	<form>
-          <h2>Filters</h2>
-      		<div class="filter-criteria streetview-type">
+      		<div class="filter-criteria collision-type">
+            <h3 class="filter-title">Collision Type</h3>
       			<h5>
-              <p><label><input type="checkbox" name="streetview" value="pedestrians" > Pedestrians</label></p>
-              <p><label><input type="checkbox" name="streetview" value="cyclists"    > Cyclists</label></p>
-            </h5>
-      		</div>
-          <div class="filter-criteria accident-type">
-      			<h5>
-              <p><label><input type="checkbox" name="accidents"  value="motorcyles"  > Motorcyles</label></p>
-              <p><label><input type="checkbox" name="accidents"  value="motorists"   > Motorists</label></p>
+              <p><label><input type="checkbox" name="streetview" value="pedestrians" > 🚶‍‍Pedestrians</label></p>
+              <p><label><input type="checkbox" name="streetview" value="cyclists"    > 🚲 Cyclists</label></p>
+              <p><label><input type="checkbox" name="accidents"  value="motorcyles"  > 🏍️ Motorcyles</label></p>
+              <p><label><input type="checkbox" name="accidents"  value="motorists"   > 🚘 Motorists</label></p>
             </h5>
       		</div>
           <button type="button" class="submit" id='reset_filters' name="button">Reset Filters</button>
