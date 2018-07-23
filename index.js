@@ -1,4 +1,4 @@
-var response = $.ajax({
+$.ajax({
   url: 'https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json',
   method: 'GET',
   dataType: 'json'
@@ -68,6 +68,11 @@ var response = $.ajax({
     initMap();
   })
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 74b6dab054f7a1316a6703f886d3a943a66db581
 })
 
 
@@ -84,7 +89,9 @@ function initMap() {
         // The map() method here has nothing to do with the Google Maps API.
   var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
-            position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE }
+            position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },
+            map: map,
+            title: location.attributes.IMPACTYPE + ' at ' + location.attributes.Hood_Name
           });
         });
 
@@ -97,6 +104,29 @@ function initMap() {
 
     var bikeRoute = document.getElementById('bike_route');
     var bikeDisplayed = false
+
+    markers.forEach(function(marker) {
+
+      var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h3 id="firstHeading" class="firstHeading">'+ marker.title +'</h3>'+
+      '<div id="bodyContent">'+
+      '<p></p>'+
+      '<p></p>'+
+      '</div>'+
+      '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+
+
+    })
 
     bikeRoute.addEventListener('click', function(e) {
         e.preventDefault()
@@ -123,6 +153,7 @@ var resetFilter       = document.getElementById('reset_filters');
 
 // pedestrians
 
+<<<<<<< HEAD
 function pedestrians(data) {
   if (cyclistsFilter.checked === true) {
     cyclists(data)
@@ -140,6 +171,12 @@ function pedestrians(data) {
     if (feature.attributes.PEDESTRIAN === 'Yes') {
       locations.push(feature)
     }
+=======
+
+function pedestrian(data) {
+  locations = data.features.filter(function(feature) {
+      return feature.attributes.PEDESTRIAN === 'Yes'
+>>>>>>> 74b6dab054f7a1316a6703f886d3a943a66db581
   })
 }
 
