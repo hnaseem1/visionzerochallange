@@ -6,6 +6,7 @@
     <title>VisionZero</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/48938155eb24b4ccdde09426066869504c6dab3c/dist/css/bootstrap.min.css">
+    <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
 
@@ -24,17 +25,30 @@
 
       <div class="filters">
       	<form>
-          <h2>Filters</h2>
-      		<div class="filter-criteria streetview-type">
+          <h3 class="filter-title">Collision Type</h3>
+      		<div class="filter-criteria collision-type">
       			<h5>
-              <p><label><input type="checkbox" name="streetview" value="pedestrians" > Pedestrians</label></p>
-              <p><label><input type="checkbox" name="streetview" value="cyclists"    > Cyclists</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="accidents" value="pedestrians" > 🚶 ‍‍Pedestrians</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="accidents" value="cyclists"    > 🚲 Cyclists</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="accidents"  value="motorcyles"  > 🏍️ Motorcyles</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="accidents"  value="motorists"   > 🚘 Motorists</label></p>
             </h5>
       		</div>
-          <div class="filter-criteria accident-type">
+          <h3 class="filter-title">Contributing Factors</h3>
+      		<div class="filter-criteria contributing-factors">
       			<h5>
-              <p><label><input type="checkbox" name="accidents"  value="injuries"    > Injuries</label></p>
-              <p><label><input type="checkbox" name="accidents"  value="fatalities"  > Fatalities</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="factors" value="aggresive-driving" > 😡 Aggressive Driving</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="factors" value="alcohol"    > 🍸 Alcohol</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="factors"  value="speeding"  > 💨 Speeding</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="factors"  value="ran-red-light"   > 🚦 Ran Red Light</label></p>
+            </h5>
+      		</div>
+          <h3 class="filter-title">Predictive Indicators</h3>
+      		<div class="filter-criteria predictive-indicators">
+      			<h5>
+              <p><label class="filter-options"><input type="checkbox" name="indicators" value="road-closures" > 🚧 Road Closures</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="indicators" value="construction"  > 🏗️ Construction</label></p>
+              <p><label class="filter-options"><input type="checkbox" name="indicators" value="major-cultural-event" > 🎭 Major Cultural/Sporting Event</label></p>
             </h5>
       		</div>
           <button type="button" class="submit" id='reset_filters' name="button">Reset Filters</button>

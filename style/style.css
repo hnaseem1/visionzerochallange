@@ -1,7 +1,12 @@
 html {
   box-sizing: border-box;
+  font-size: 20px;
   margin: 0;
   padding: 0;
+}
+
+label, p, h1, h2, h3, h4, h5 {
+  margin: 0;
 }
 
 .header {
@@ -22,13 +27,32 @@ nav {
 /* content has filter and map */
 .content {
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 30% 70%;
   grid-template-rows: 100%;
   height: 95vh;
 }
 
 .filters {
-  padding: 2em;
+  /* padding: 2em; */
+  background: #eeeeee;
+}
+
+.filter-criteria {
+  padding: 0.75em 0.75em 0.15em 1em;
+}
+
+.filter-title {
+  background: #fff;
+  font-size: 1em;
+  margin: 0;
+  padding: 0.5em;
+}
+
+.filter-options {
+  font-size: 0.8em;
+  font-weight: normal;
+  margin: 0;
+  padding-left: 0.25em;
 }
 
 footer {
