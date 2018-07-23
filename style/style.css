@@ -32,9 +32,28 @@ nav {
   height: 95vh;
 }
 
+.tab {
+  background: #d6d6d6;
+  padding: 1em 0.75em 0;
+}
+
+.tablinks {
+  background: #a8bbff;
+  border: none;
+  width: 32%;
+}
+
+.tablinks.active {
+  background: #fff;
+}
+
+.tablinks:hover {
+
+}
+
 /* default view on collision tab*/
 #infrastructure, #context {
-  display: none; 
+  display: none;
 }
 
 .filters {
