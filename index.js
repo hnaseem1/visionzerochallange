@@ -48,7 +48,7 @@ $.ajax({
 
     reset(data)
     initMap();
-    
+
   })
 })
 
@@ -68,7 +68,14 @@ function initMap() {
           return new google.maps.Marker({
             position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },
             map: map,
-            title: location.attributes.IMPACTYPE + ' at ' + location.attributes.Hood_Name
+            type: location.attributes.IMPACTYPE,
+            details: location.attributes.ACCLASS,
+            age: location.attributes.INVAGE,
+            dateTime: location.attributes.DATE,
+            factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},
+            neighbourhood: location.attributes.Hood_Name,
+            ward: location.attributes.Ward_Name
+
           });
         });
 
@@ -87,9 +94,15 @@ function initMap() {
       var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
-      '<h3 id="firstHeading" class="firstHeading">'+ marker.title +'</h3>'+
+      '<h4 id="firstHeading" class="firstHeading">'+ 'Collision Details'+'</h4>'+
       '<div id="bodyContent">'+
-      '<p></p>'+
+      '<p>'+ 'Type: ' + marker.type  + '</p>'+
+      '<p>'+ 'Details: ' + marker.details  + '</p>'+
+      '<p>'+ 'Age Range: ' + marker.age  + '</p>'+
+      '<p>'+ 'Date, Time: ' + marker.dateTime  + '</p>'+
+      '<p>'+ 'Factors: ' + ''  + '</p>'+
+      '<p>'+ 'Neigbourhood: ' + marker.neighbourhood  + '</p>'+
+      '<p>'+ 'Ward: ' + marker.ward  + '</p>'+
       '<p></p>'+
       '</div>'+
       '</div>';
