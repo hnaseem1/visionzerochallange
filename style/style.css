@@ -14,14 +14,13 @@ label, p, h1, h2, h3, h4, h5 {
 }
 
 .header {
-  background: #000;
   color: #ccc;
   display: grid;
   grid-template-columns: 60% 40%;
 }
 
 .logo {
-  padding: 0 1em;
+  padding: 1em;
 }
 
 nav {
@@ -36,7 +35,7 @@ nav a {
 /* content has filter and map */
 .content {
   display: grid;
-  grid-template-columns: 25% 75%;
+  grid-template-columns: 30% 70%;
   grid-template-rows: 100%;
   height: 95vh;
 }
@@ -51,7 +50,7 @@ nav a {
   background: #a8bbff;
   border: none;
   font-weight: 600;
-  width: 32%;
+  width: 49%;
 }
 
 .tablinks.active {
@@ -63,7 +62,8 @@ nav a {
   display: none;
 }
 #collision-tab {
-  background: #fff;
+  background: #2a6ddf;
+  color: #fff;
 }
 
 
@@ -74,6 +74,15 @@ nav a {
 
 .filter-criteria {
   padding: 0.75em 0.75em 0.15em 1em;
+}
+
+.sub-header {
+  background: #2a6ddf;
+  color: #fff;
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0;
+  padding: 0.5em 2em;
 }
 
 .filter-title {
