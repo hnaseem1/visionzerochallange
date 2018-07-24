@@ -33,7 +33,6 @@ $.ajax({
       cyclists(data);
       initMap();
     } else {
-      reset(data);
       initMap();
     }
   })
@@ -189,9 +188,26 @@ function cyclists(data) {
 // injuries
 
 function injuries(data) {
-  locations = data.features.filter(function(feature) {
-      return feature.attributes.INJURY !== ' '
-  })
+
+  var pedestriansFilter = document.querySelector("input[value='pedestrians']");
+  var cyclistsFilter    = document.querySelector("input[value='cyclists']");
+
+  if (pedestriansFilter.checked) {
+
+    locations = data.features.filter(function(feature) {
+        return feature.attributes.PEDESTRIAN === 'Yes' && feature.attributes.INJURY !== ' '
+    })
+  } else if (cyclistsFilter.checked) {
+
+    locations = data.features.filter(function(feature) {
+        return feature.attributes.CYCLIST === 'Yes' && feature.attributes.INJURY !== ' '
+    })
+  } else {
+    locations = data.features.filter(function(feature) {
+        return feature.attributes.INJURY !== ' '
+    })
+  }
+
 }
 
 // fatalities
