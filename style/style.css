@@ -36,7 +36,7 @@ nav a {
 /* content has filter and map */
 .content {
   display: grid;
-  grid-template-columns: 30% 70%;
+  grid-template-columns: 25% 75%;
   grid-template-rows: 100%;
   height: 95vh;
 }
@@ -62,6 +62,10 @@ nav a {
 #infrastructure, #context {
   display: none;
 }
+#collision-tab {
+  background: #fff;
+}
+
 
 .filters {
   /* padding: 2em; */
@@ -87,20 +91,14 @@ nav a {
   padding-left: 2.5em;
 }
 
+.filter-options span {
+  padding-left: 1em;
+}
+
 /* checkboxes */
 input {
   border-radius: 0;
 }
-
-footer {
-  background: #000;
-  color: #ccc;
-  bottom: 0;
-  position: fixed;
-  text-align: center;
-  width: 100%;
-}
-
 
 
 /* Always set the map height explicitly to define the size of the div
