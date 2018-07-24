@@ -536,15 +536,17 @@ function initMap() {
         // Note: The code uses the JavaScript Array.prototype.map() method to
         // create an array of markers based on a given "locations" array.
         // The map() method here has nothing to do with the Google Maps API.
+  var image = 'assets/Automobile-Orange-Circle.svg'
   var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
             position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },             map: map,
-             type: location.attributes.IMPACTYPE,             details: location.attributes.ACCLASS,             age: location.attributes.INVAGE,             dateTime: location.attributes.DATE,             factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},             neighbourhood: location.attributes.Hood_Name,             ward: location.attributes.Ward_Name
+             type: location.attributes.IMPACTYPE,             details: location.attributes.ACCLASS,             age: location.attributes.INVAGE,             dateTime: location.attributes.DATE,             factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},             neighbourhood: location.attributes.Hood_Name,             ward: location.attributes.Ward_Name,
+            icon: image
           });
         });
 
 
-        // Add a marker clusterer to manage the markers.
+  //       // Add a marker clusterer to manage the markers.
   // var markerCluster = new MarkerClusterer(map, markers,
   //           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
