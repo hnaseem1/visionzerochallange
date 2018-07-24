@@ -20,7 +20,7 @@ $.ajax({
     if(this.checked && injuriesFilter.checked ) {
       injuries(data);
       initMap();
-    } else if (this.checked && fatalities.checked) {
+    } else if (this.checked && fatalitiesFilter.checked) {
       fatalities(data);
       initMap();
     } else if (this.checked) {
@@ -33,7 +33,7 @@ $.ajax({
     if(this.checked && injuriesFilter.checked ) {
       injuries(data);
       initMap();
-    } else if (this.checked && fatalities.checked) {
+    } else if (this.checked && fatalitiesFilter.checked) {
       fatalities(data);
       initMap();
     } else if (this.checked) {
