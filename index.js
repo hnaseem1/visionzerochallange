@@ -1,3 +1,10 @@
+var pedestriansFilter = document.querySelector("input[value='pedestrians']");
+var cyclistsFilter    = document.querySelector("input[value='cyclists']");
+var injuriesFilter    = document.querySelector("input[value='injuries']");
+var fatalitiesFilter  = document.querySelector("input[value='fatalities']");
+var resetFilter       = document.getElementById('reset_filters');
+
+
 $.ajax({
   url: 'https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json',
   method: 'GET',
@@ -8,21 +15,12 @@ $.ajax({
   initMap();
 
   //----------------------------- filters ----------------------------- //
-  var pedestriansFilter = document.querySelector("input[value='pedestrians']");
-  var cyclistsFilter    = document.querySelector("input[value='cyclists']");
-  var injuriesFilter    = document.querySelector("input[value='injuries']");
-  var fatalitiesFilter  = document.querySelector("input[value='fatalities']");
-  var resetFilter       = document.getElementById('reset_filters');
-
-
   // pedestrians
   pedestriansFilter.addEventListener('change', function() {
     if(this.checked) {
       pedestrian(data)
       initMap();
-      console.log(locations);
     } else {
-      console.log(locations);
       reset(data)
       initMap();
     }
@@ -41,18 +39,25 @@ $.ajax({
     if(this.checked) {
       injuries(data);
       initMap();
-    } else {
-      reset(data);
+    } else if (pedestriansFilter.checked) {
+      pedestrian(data);
+      initMap();
+    } else if (cyclistsFilter.checked) {
+      cyclists(data);
       initMap();
     }
+
   })
   // fatalities
   fatalitiesFilter.addEventListener('change', function() {
     if(this.checked) {
       fatalities(data);
       initMap();
-    } else {
-      reset(data);
+    } else if (pedestriansFilter.checked) {
+      pedestrian(data);
+      initMap();
+    } else if (cyclistsFilter.checked) {
+      cyclists(data);
       initMap();
     }
   })
@@ -159,9 +164,6 @@ function cyclists(data) {
 
 function injuries(data) {
 
-  var pedestriansFilter = document.querySelector("input[value='pedestrians']");
-  var cyclistsFilter    = document.querySelector("input[value='cyclists']");
-
   if (pedestriansFilter.checked) {
 
     locations = data.features.filter(function(feature) {
@@ -183,9 +185,23 @@ function injuries(data) {
 // fatalities
 
 function fatalities(data) {
-  locations = data.features.filter(function(feature) {
-    return feature.attributes.FATAL_NO > 0
-  })
+
+  if (pedestriansFilter.checked) {
+
+    locations = data.features.filter(function(feature) {
+        return feature.attributes.PEDESTRIAN === 'Yes' && feature.attributes.FATAL_NO > 0
+    })
+  } else if (cyclistsFilter.checked) {
+
+    locations = data.features.filter(function(feature) {
+        return feature.attributes.CYCLIST === 'Yes' && feature.attributes.FATAL_NO > 0
+    })
+  } else {
+    locations = data.features.filter(function(feature) {
+        return feature.attributes.FATAL_NO > 0
+    })
+  }
+
 }
 
 function reset(data) {
