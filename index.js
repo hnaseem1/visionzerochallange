@@ -10,10 +10,10 @@ var response = $.ajax({
   //----------------------------- filters ----------------------------- //
   var pedestriansFilter       = document.querySelector("input[value='pedestrians']");
   var cyclistsFilter          = document.querySelector("input[value='cyclists']");
-  var motorcylesFilter        = document.querySelector("input[value='motorcyles']");
+  var motorcyclesFilter       = document.querySelector("input[value='motorcycles']");
   var motoristsFilter         = document.querySelector("input[value='motorists']");
 
-  var agressiveDrivingFilter  = document.querySelector("input[value='aggresive-driving']");
+  var aggressiveDrivingFilter = document.querySelector("input[value='aggresive-driving']");
   var alcoholFilter           = document.querySelector("input[value='alcohol']");
   var speedingFilter          = document.querySelector("input[value='speeding']");
   var ranRedLightFilter       = document.querySelector("input[value='ran-red-light']");
@@ -23,242 +23,252 @@ var response = $.ajax({
 
   // pedestrians
   pedestriansFilter.addEventListener('change', function() {
-    locations = []
-    if (!this.checked && cyclistsFilter.checked !== true && motorcylesFilter.checked !== true && motoristsFilter.checked !== true) {
-      reset(data)
-      initMap();
-    } else if (this.checked && cyclistsFilter.checked === true && motorcylesFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('All filters clicked')
+    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
       locations = []
-      pedestrians(data)
-      cyclists(data)
-      motorcycles(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && cyclistsFilter.checked === true && motorcylesFilter.checked === true) {
-      console.log('Three filters clicked')
-      pedestrians(data)
-      cyclists(data)
-      motorcycles(data)
-      initMap();
-    } else if (this.checked && motorcylesFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('Three filters clicked')
-      pedestrians(data)
-      motorcycles(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && cyclistsFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('Three filters clicked')
-      pedestrians(data)
-      cyclists(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && cyclistsFilter.checked === true) {
-      console.log('pedestrians and cyclists filters clicked')
-      pedestrians(data)
-      cyclists(data)
-      initMap();
-    } else if (this.checked && motorcylesFilter.checked === true) {
-      pedestrians(data)
-      motorcycles(data)
-      initMap();
-    } else if(this.checked && motoristsFilter.checked === true) {
-      pedestrians(data)
-      fatalities()
-      initMap();
+      reset(data)
     } else if (this.checked) {
+      locations = []
+      if (cyclistsFilter.checked === true) {
+        cyclists(data)
+      }
+      if (motorcyclesFilter.checked === true) {
+        motorcycles(data)
+      }
+      if (motoristsFilter.checked == true) {
+        motorists(data)
+      }
       pedestrians(data)
-      initMap();
+    } else if (this.checked !== true) {
+      locations = []
+      if (pedestriansFilter.checked === true) {
+        pedestrians(data)
+      }
+      if (motorcyclesFilter.checked === true) {
+        motorcycles(data)
+      }
+      if (motoristsFilter.checked == true) {
+        motorists(data)
+      }
     }
+    initMap();
   })
   // cyclists
   cyclistsFilter.addEventListener('change', function() {
-    locations = []
-    if (!this.checked && cyclistsFilter.checked !== true && motorcylesFilter.checked !== true && motoristsFilter.checked !== true) {
+    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
+      locations = []
       reset(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && motorcylesFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('All filters clicked')
-      pedestrians(data)
-      cyclists(data)
-      motorcycles(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && motorcylesFilter.checked === true) {
-      console.log('Three filters clicked')
-      cyclists(data)
-      pedestrians(data)
-      motorcycles(data)
-      initMap();
-    } else if (this.checked && motorcylesFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('Three filters clicked')
-      cyclists(data)
-      motorcycles(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('Three filters clicked')
-      cyclists(data)
-      pedestrians(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true) {
-      cyclists(data)
-      pedestrians(data)
-      initMap();
-    } else if (this.cheched && motorcylesFilter.checked === true) {
-      cyclists(data)
-      motorcycles(data)
-      initMap();
-    } else if (this.checked && motoristsFilter.checked === true) {
-      cyclists(data)
-      fatalities(data)
-      initMap();
     } else if (this.checked) {
-      cyclists(data);
-      initMap();
+      locations = []
+      if (pedestriansFilter.checked === true) {
+        pedestrians(data)
+      }
+      if (motorcyclesFilter.checked === true) {
+        motorcycles(data)
+      }
+      if (motoristsFilter.checked == true) {
+        motorists(data)
+      }
+      motorists(data)
+    } else if (this.checked !== true) {
+      locations = []
+      if (pedestriansFilter.checked === true) {
+        pedestrians(data)
+      }
+      if (motorcyclesFilter.checked === true) {
+        motorcycles(data)
+      }
+      if (motoristsFilter.checked == true) {
+        motorists(data)
+      }
     }
+    initMap();
   })
   // motorcycles
-  motorcylesFilter.addEventListener('change', function() {
-    locations = []
-    if (!this.checked && cyclistsFilter.checked !== true && motorcylesFilter.checked !== true && motoristsFilter.checked !== true) {
+  motorcyclesFilter.addEventListener('change', function() {
+    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
+      locations = []
       reset(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && motorcylesFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('All filters clicked')
-      pedestrians(data)
-      cyclists(data)
-      motorcycles(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && cyclistsFilter.checked === true) {
-      console.log('Three filters clicked')
-      motorcycles(data)
-      pedestrians(data)
-      cyclists(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('Three filters clicked')
-      motorcycles(data)
-      pedestrians(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && cyclistsFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('Three filters clicked')
-      motorcycles(data)
-      cyclists(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true) {
-      motorcycles(data)
-      pedestrians(data)
-      initMap();
-    } else if (this.cheched && cyclistsFilter.checked === true) {
-      motorcycles(data)
-      cyclists(data)
-      initMap();
-    } else if (this.checked && motoristsFilter.checked === true) {
-      motorcycles(data)
-      fatalities(data)
-      initMap();
     } else if (this.checked) {
-      motorcycles(data);
-      initMap();
+      locations = []
+      if (pedestriansFilter.checked === true) {
+        pedestrians(data)
+      }
+      if (cyclistsFilter.checked === true) {
+        cyclists(data)
+      }
+      if (motoristsFilter.checked == true) {
+        motorists(data)
+      }
+      motorcycles(data)
+    } else if (this.checked !== true) {
+      locations = []
+      if (pedestriansFilter.checked === true) {
+        pedestrians(data)
+      }
+      if (cyclistsFilter.checked === true) {
+        cyclists(data)
+      }
+      if (motorcyclesFilter.checked == true) {
+        pedestrians(data)
+      }
     }
+    initMap();
   })
   // motorists
   motoristsFilter.addEventListener('change', function() {
-    locations = []
-    if (!this.checked && cyclistsFilter.checked !== true && motorcylesFilter.checked !== true && motoristsFilter.checked !== true) {
+    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
+      locations = []
       reset(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && motorcylesFilter.checked === true && motoristsFilter.checked === true) {
-      console.log('All filters clicked')
-      pedestrians(data)
-      cyclists(data)
-      motorcycles(data)
-      fatalities(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && cyclistsFilter.checked === true) {
-      console.log('All filters clicked')
-      fatalities(data)
-      pedestrians(data)
-      cyclists(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true && motorcylesFilter.checked === true) {
-      console.log('All filters clicked')
-      fatalities(data)
-      pedestrians(data)
-      motorcycles(data)
-      initMap();
-    } else if (this.checked && cyclistsFilter.checked === true && motorcylesFilter.checked === true) {
-      console.log('All filters clicked')
-      fatalities(data)
-      cyclists(data)
-      motorcycles(data)
-      initMap();
-    } else if (this.checked && pedestriansFilter.checked === true) {
-      fatalities(data)
-      pedestrians(data)
-      initMap();
-    } else if (this.cheched && cyclistsFilter.checked === true) {
-      fatalities(data)
-      cyclists(data)
-      initMap();
-    } else if (this.checked && motorcylesFilter.checked === true) {
-      fatalities(data)
-      motorcycles(data)
-      initMap();
     } else if (this.checked) {
-      fatalities(data);
-      initMap();
+      locations = []
+      if (pedestriansFilter.checked === true) {
+        pedestrians(data)
+      }
+      if (cyclistsFilter.checked === true) {
+        cyclists(data)
+      }
+      if (motorcyclesFilter.checked == true) {
+        pedestrians(data)
+      }
+      motorists(data)
+    } else if (this.checked !== true) {
+      locations = []
+      if (pedestriansFilter.checked === true) {
+        pedestrians(data)
+      }
+      if (cyclistsFilter.checked === true) {
+        cyclists(data)
+      }
+      if (motorcyclesFilter.checked == true) {
+        pedestrians(data)
+      }
     }
+    initMap();
   })
 
   // aggressive driving
-  agressiveDrivingFilter.addEventListener('change', function() {
-    locations = []
+  aggressiveDrivingFilter.addEventListener('change', function() {
     if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      locations = []
       reset(data)
-      initMap();
     } else if (this.checked) {
+      locations = []
+      if (alcoholFilter.checked === true) {
+        alcohol(data)
+      }
+      if (speedingFilter.checked === true) {
+        speeding(data)
+      }
+      if (ranRedLightFilter.checked === true) {
+        ranRedLight(data)
+      }
       aggressiveDriving(data);
-      initMap();
+    } else if (this.checked !== true) {
+      locations = []
+      if (alcoholFilter.checked === true) {
+        alcohol(data)
+      }
+      if (speedingFilter.checked === true) {
+        speeding(data)
+      }
+      if (ranRedLightFilter.checked === true) {
+        ranRedLight(data)
+      }
     }
+    initMap();
   })
   // alcohol
   alcoholFilter.addEventListener('change', function() {
-    locations = []
     if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      locations = []
       reset(data)
-      initMap();
     } else if (this.checked) {
+      locations = []
+      if (aggressiveDrivingFilter.checked === true) {
+        aggressiveDriving(data)
+      }
+      if (speedingFilter.checked === true) {
+        speeding(data)
+      }
+      if (ranRedLightFilter.checked === true) {
+        ranRedLight(data)
+      }
       alcohol(data);
-      initMap();
+    } else if (this.checked !== true) {
+      locations = []
+      if (alcoholFilter.checked === true) {
+        alcohol(data)
+      }
+      if (speedingFilter.checked === true) {
+        speeding(data)
+      }
+      if (ranRedLightFilter.checked === true) {
+        ranRedLight(data)
+      }
     }
+    initMap();
   })
   // speeding
   speedingFilter.addEventListener('change', function() {
-    locations = []
     if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      locations = []
       reset(data)
-      initMap();
     } else if (this.checked) {
+      locations = []
+      if (aggressiveDrivingFilter.checked === true) {
+        alcohol(data)
+      }
+      if (alcoholFilter.checked === true) {
+        alcohol(data)
+      }
+      if (ranRedLightFilter.checked === true) {
+        ranRedLight(data)
+      }
       speeding(data);
-      initMap();
+    } else if (this.checked !== true) {
+      locations = []
+      if (aggressiveDrivingFilter.checked === true) {
+        alcohol(data)
+      }
+      if (alcoholFilter.checked === true) {
+        alcohol(data)
+      }
+      if (ranRedLightFilter.checked === true) {
+        ranRedLight(data)
+      }
     }
+    initMap();
   })
   // ran red light
   ranRedLightFilter.addEventListener('change', function() {
-    locations = []
     if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
+      locations = []
       reset(data)
-      initMap();
     } else if (this.checked) {
+      locations = []
+      if (aggressiveDrivingFilter.checked === true) {
+        aggressiveDriving(data)
+      }
+      if (alcoholFilter.checked === true) {
+        alcohol(data)
+      }
+      if (speedingFilter.checked === true) {
+        speeding(data)
+      }
       ranRedLight(data);
-      initMap();
+    } else if (this.checked !== true) {
+      locations = []
+      if (aggressiveDrivingFilter.checked === true) {
+        aggressiveDriving(data)
+      }
+      if (alcoholFilter.checked === true) {
+        alcohol(data)
+      }
+      if (speedingFilter.checked === true) {
+        speeding(data)
+      }
     }
+    initMap();
   })
 
   // reset filter
@@ -266,7 +276,7 @@ var response = $.ajax({
     console.log('filter reset')
     pedestriansFilter.checked = false;
     cyclistsFilter.checked    = false;
-    motorcylesFilter.checked    = false;
+    motorcyclesFilter.checked    = false;
     motoristsFilter.checked  = false;
     reset(data)
     initMap();
