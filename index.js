@@ -18,8 +18,13 @@ var response = $.ajax({
   var speedingFilter          = document.querySelector("input[value='speeding']");
   var ranRedLightFilter       = document.querySelector("input[value='ran-red-light']");
 
+  var roadClosuresConstruction = document.querySelector("input[value='road-closures-construction']");
+  var majorCulturalEvent      = document.querySelector("input[value='major-cultural-event']");
+
   var resetFilter             = document.getElementById('reset_filters');
 
+  var map
+  var markers = []
 
   // pedestrians
   pedestriansFilter.addEventListener('change', function() {
@@ -274,14 +279,19 @@ var response = $.ajax({
   // reset filter
   resetFilter.addEventListener('click', function() {
     console.log('filter reset')
-    pedestriansFilter.checked = false;
-    cyclistsFilter.checked    = false;
-    motorcyclesFilter.checked    = false;
-    motoristsFilter.checked  = false;
+    pedestriansFilter.checked   = false;
+    cyclistsFilter.checked      = false;
+    motorcyclesFilter.checked   = false;
+    motoristsFilter.checked     = false;
+    aggressiveDrivingFilter.checked  = false;
+    alcoholFilter.checked       = false;
+    speedingFilter.checked      = false;
+    ranRedLightFilter.checked   = false;
+    roadClosuresConstruction.checked  = false;
+    majorCulturalEvent.checked  = false;
     reset(data)
     initMap();
   })
-
 })
 
 
@@ -596,11 +606,6 @@ function initMap() {
         }
     })
   }
-
-// marker colours
-
-function markerColour() {
-}
 
 
 // ======================== Filter Functions ==========================
