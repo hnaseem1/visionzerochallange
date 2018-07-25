@@ -567,6 +567,10 @@ function initMap() {
     })
   }
 
+// marker colours
+
+function markerColour() {
+}
 
 
 // ======================== Filter Functions ==========================
