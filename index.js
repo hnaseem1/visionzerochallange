@@ -303,7 +303,7 @@ function initMap() {
         "elementType": "labels.icon",
         "stylers": [
           {
-            "visibility": "on"
+            "visibility": "off"
           }
         ]
       },
@@ -536,29 +536,26 @@ function initMap() {
         // Note: The code uses the JavaScript Array.prototype.map() method to
         // create an array of markers based on a given "locations" array.
         // The map() method here has nothing to do with the Google Maps API.
+  var image = 'assets/Automobile-Orange-Circle.svg'
   var markers = locations.map(function(location, i) {
           return new google.maps.Marker({
-            position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },
-            map: map,
-            type: location.attributes.IMPACTYPE,
-            details: location.attributes.ACCLASS,
-            age: location.attributes.INVAGE,
-            dateTime: location.attributes.DATE,
-            factors: {speed: location.attributes.SPEEDING, age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},
-            neighbourhood: location.attributes.Hood_Name,
-            ward: location.attributes.Ward_Name
+            position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },             map: map,
+             type: location.attributes.IMPACTYPE,             details: location.attributes.ACCLASS,             age: location.attributes.INVAGE,             dateTime: location.attributes.DATE,             factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},             neighbourhood: location.attributes.Hood_Name,             ward: location.attributes.Ward_Name,
+            icon: image
+
           });
         });
 
 
-        // Add a marker clusterer to manage the markers.
-  var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+  //       // Add a marker clusterer to manage the markers.
+  // var markerCluster = new MarkerClusterer(map, markers,
+  //           {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
     var bikeLayer = new google.maps.BicyclingLayer();
 
     var bikeRoute = document.getElementById('bike_route');
     var bikeDisplayed = false
+
 
     markers.forEach(function(marker) {
       
@@ -588,7 +585,7 @@ function initMap() {
 
     })
 
-    bikeRoute.addEventListener('click', function(e) {
+  bikeRoute.addEventListener('click', function(e) {
         e.preventDefault()
         if (bikeDisplayed === false ) {
             bikeLayer.setMap(map);
@@ -600,6 +597,10 @@ function initMap() {
     })
   }
 
+// marker colours
+
+function markerColour() {
+}
 
 
 // ======================== Filter Functions ==========================
@@ -703,6 +704,7 @@ function ranRedLight(data) {
     }
   })
 }
+
 
 // reset data
 

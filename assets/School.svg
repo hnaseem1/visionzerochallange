@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>diet-food</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-15" transform="translate(-388.000000, -729.000000)">
+            <rect fill="#FFFFFF" x="0" y="0" width="1440" height="1024"></rect>
+            <g id="diet-food" transform="translate(388.000000, 729.000000)" fill="#111111" fill-rule="nonzero">
+                <path d="M10.687,0.814 C11.4335462,0.259411377 12.3629245,0.00919412517 13.287,0.114 C13.2082523,1.06660342 12.7809979,1.95671668 12.087,2.614 C11.3370858,3.16159674 10.4104778,3.4110681 9.487,3.314 C9.5657477,2.36139658 9.99300207,1.47128332 10.687,0.814 Z" id="Shape"></path>
+                <path d="M14.187,5.514 C12.787,4.514 11.187,4.414 8.987,5.114 C6.887,4.414 5.187,4.514 3.787,5.514 C3.26560966,5.90706642 2.84251831,6.4157345 2.551,7 L11,7 C11.5522847,7 12,7.44771525 12,8 L12,12 C12,12.5522847 11.5522847,13 11,13 L3.231,13 C3.94534177,13.9960516 4.80722484,14.8774923 5.787,15.614 C7.087,16.714 8.987,15.114 8.987,15.114 C8.987,15.114 10.887,16.714 12.187,15.614 C17.987,11.114 15.887,6.714 14.187,5.514 Z" id="Shape"></path>
+                <polygon id="Shape" points="9 8 9 10 8 10 8 8 6 8 6 10 5 10 5 8 3 8 3 10 2 10 2 8 0 8 0 12 11 12 11 8"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>
