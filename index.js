@@ -542,6 +542,7 @@ function initMap() {
             position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },             map: map,
              type: location.attributes.IMPACTYPE,             details: location.attributes.ACCLASS,             age: location.attributes.INVAGE,             dateTime: location.attributes.DATE,             factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},             neighbourhood: location.attributes.Hood_Name,             ward: location.attributes.Ward_Name,
             icon: image
+
           });
         });
 
@@ -555,7 +556,36 @@ function initMap() {
     var bikeRoute = document.getElementById('bike_route');
     var bikeDisplayed = false
 
-    bikeRoute.addEventListener('click', function(e) {
+
+    markers.forEach(function(marker) {
+      
+      var contentString = '<div id="content">'+
+      '<div id="siteNotice">'+
+      '</div>'+
+      '<h4 id="firstHeading" class="firstHeading">'+ 'Collision Details'+'</h4>'+
+      '<div id="bodyContent">'+
+      '<p>'+ 'Type: ' + marker.type  + '</p>'+
+      '<p>'+ 'Details: ' + marker.details  + '</p>'+
+      '<p>'+ 'Age Range: ' + marker.age  + '</p>'+
+      '<p>'+ 'Date, Time: ' + marker.dateTime  + '</p>'+
+      '<p>'+ 'Factors: ' + ''  + '</p>'+
+      '<p>'+ 'Neigbourhood: ' + marker.neighbourhood  + '</p>'+
+      '<p>'+ 'Ward: ' + marker.ward  + '</p>'+
+      '<p></p>'+
+      '</div>'+
+      '</div>';
+
+      var infowindow = new google.maps.InfoWindow({
+        content: contentString
+      });
+
+      marker.addListener('click', function() {
+        infowindow.open(map, marker);
+      });
+
+    })
+
+  bikeRoute.addEventListener('click', function(e) {
         e.preventDefault()
         if (bikeDisplayed === false ) {
             bikeLayer.setMap(map);
@@ -674,6 +704,7 @@ function ranRedLight(data) {
     }
   })
 }
+
 
 // reset data
 
