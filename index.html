@@ -6,39 +6,74 @@
     <title>VisionZero</title>
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="https://cdn.rawgit.com/twbs/bootstrap/48938155eb24b4ccdde09426066869504c6dab3c/dist/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
 
 
   <body>
     <header class="header">
-      <h1 class="logo">VisionZero</h1>
+      <img src="assets/VisionZeroLogo.svg" class="logo"/>
       <nav>
-        <a href="/">about</a>
-        <a href="/">features</a>
-        <a href="/">data</a>
+        <a href="/">About</a>
+        <a href="/">Features</a>
+        <a href="/">Data</a>
       </nav>
     </header>
 
     <div class="content">
 
       <div class="filters">
+        <div class="tab">
+
+          <button id="collision-tab" class="tablinks" onclick="openTab(event, 'collision')"     >Traffic Collisions</button>
+
+          <button class="tablinks" onclick="openTab(event, 'context')"       >Context</button>
+        </div> <!-- tab -->
       	<form>
-          <h2>Filters</h2>
-      		<div class="filter-criteria streetview-type">
-      			<h5>
-              <p><label><input type="radio" name="streetview" value="pedestrians" > Pedestrians</label></p>
-              <p><label><input type="radio" name="streetview" value="cyclists"    > Cyclists</label></p>
-            </h5>
-      		</div>
-          <div class="filter-criteria accident-type">
-      			<h5>
-              <p><label><input type="radio" name="accidents"  value="injuries"    > Injuries</label></p>
-              <p><label><input type="radio" name="accidents"  value="fatalities"  > Fatalities</label></p>
-            </h5>
-      		</div>
-          <button type="button" class="submit" id='reset_filters' name="button">Reset Filters</button>
-          <button type="button" class="submit" id='bike_route' name="button">Bike Route</button>
+          <div id="collision" class="tabcontent">
+            <h3 class="sub-header">Toronto Police Services Data: 2007-2017</h3>
+            <h3 class="filter-title">Collision Resulting in Fatality or Serious Injury</h3>
+        		<div class="filter-criteria collision-type">
+        			<h5>
+                <p><label class="filter-options"><input type="radio" name="accidents" value="pedestrians" ><span>🚶 ‍‍Pedestrians</span></label></p>
+                <p><label class="filter-options"><input type="radio" name="accidents" value="cyclists"    ><span>🚲 Cyclists</span></label></p>
+                <p><label class="filter-options"><input type="radio" name="accidents"  value="motorcycles" ><span> 🏍️ Motorcyles</span></label></p>
+                <p><label class="filter-options"><input type="radio" name="accidents"  value="motorists"  ><span> 🚘 Motorists</span></label></p>
+              </h5>
+        		</div>
+            <h3 class="sub-header">Filters</h3>
+            <h3 class="filter-title">Date Range</h3>
+            <div class="filter-criteria date-range">
+              dropdown
+            </div>
+            <h3 class="filter-title">Contributing Factors Recorded by Toronto Police</h3>
+        		<div class="filter-criteria contributing-factors">
+        			<h5>
+                <p><label class="filter-options"><input type="radio" name="factors" value="aggresive-driving" ><span> 😡 Aggressive Driving</span></label></p>
+                <p><label class="filter-options"><input type="radio" name="factors" value="alcohol"    ><span> 🍸 Alcohol</span></label></p>
+                <p><label class="filter-options"><input type="radio" name="factors" value="speeding"  ><span> 💨 Speeding</span></label></p>
+                <p><label class="filter-options"><input type="radio" name="factors" value="ran-red-light"   ><span> 🚦 Ran Red Light</span></label></p>
+              </h5>
+        		</div>
+            <h3 class="filter-title">Predictive Indicators</h3>
+        		<div class="filter-criteria predictive-indicators">
+        			<h5>
+                <p><label class="filter-options"><input type="radio" name="indicators" value="road-closures-construction"><span> 🚧 Road Closures/Construction</span></label></p>
+                <p><label class="filter-options"><input type="radio" name="indicators" value="major-cultural-event" ><span> 🎭 Major Cultural/Sporting Event</span></label></p>
+
+              </h5>
+        		</div>
+            <button type="button" class="submit" id='reset_filters' name="button">Reset Filters</button>
+            <button type="button" class="submit" id='bike_route' name="button">Bike Route</button>
+          </div> <!-- collision tab -->
+          <div id="infrastructure" class="tabcontent">
+            infrastructure info
+          </div>
+          <div id="context" class="tabcontent">
+            Context info
+          </div>
       	</form>
       </div> <!-- filters -->
 
@@ -53,8 +88,5 @@
     </script>
     <script src="index.js"></script>
 
-    <footer>
-      2018
-    </footer>
   </body>
 </html>

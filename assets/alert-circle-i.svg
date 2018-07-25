@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="15px" height="15px" viewBox="0 0 15 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>alert-circle-i copy 2</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Desktop-HD-Copy-15" transform="translate(-390.000000, -212.000000)">
+            <rect fill="#FFFFFF" x="0" y="0" width="1440" height="1024"></rect>
+            <g id="alert-circle-i-copy-2" transform="translate(390.000000, 212.000000)">
+                <circle id="Oval" fill="#2A6DDF" fill-rule="nonzero" cx="7.5" cy="4" r="1"></circle>
+                <circle id="Oval" stroke="#064CFC" stroke-linecap="round" stroke-linejoin="round" cx="7.5" cy="7.5" r="7"></circle>
+                <path d="M7.5,11.5 L7.5,7.5" id="Shape" stroke="#2A6DDF" stroke-linecap="round" stroke-linejoin="round"></path>
+            </g>
+        </g>
+    </g>
+</svg>
