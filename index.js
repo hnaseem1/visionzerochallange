@@ -3,15 +3,16 @@ var cyclistsFilter    = document.querySelector("input[value='cyclists']");
 var injuriesFilter    = document.querySelector("input[value='injuries']");
 var fatalitiesFilter  = document.querySelector("input[value='fatalities']");
 var resetFilter       = document.getElementById('reset_filters');
-
-
+var map;
+var markers = [];
+var locations
 $.ajax({
   url: 'https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json',
   method: 'GET',
   dataType: 'json'
 }).done(function(data) {
+  locations = data.features
 
-  reset(data);
   initMap();
 
   //----------------------------- filters ----------------------------- //
@@ -45,9 +46,7 @@ $.ajax({
   })
   // reset filter
   resetFilter.addEventListener('click', function() {
-
-    reset(data)
-    initMap();
+    reset()
 
   })
 })
@@ -55,111 +54,85 @@ $.ajax({
 
 function initMap() {
 
-<<<<<<< HEAD
-    var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 11,
-            center: {lat: 43.713783, lng: -79.385296}
-            });
-
-            // Add some markers to the map.
-            // Note: The code uses the JavaScript Array.prototype.map() method to
-            // create an array of markers based on a given "locations" array.
-            // The map() method here has nothing to do with the Google Maps API.
-
-    var infoWin = new google.maps.InfoWindow();
-
-    var markers = locations.map(function(location, i) {
-        var marker = new google.maps.Marker({
-                position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE }
-            });
-            google.maps.event.addListener(marker, 'click', function(evt) {
-                infoWin.setContent('testestestest');
-                infoWin.open(map, marker);
-            })
-            return marker;
-            });
-
-
-            // Add a marker clusterer to manage the markers.
-    var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-=======
-  var map = new google.maps.Map(document.getElementById('map'), {
+  map = new google.maps.Map(document.getElementById('map'), {
           zoom: 11,
           center: {lat: 43.713783, lng: -79.385296}
         });
 
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-  var markers = locations.map(function(location, i) {
-          return new google.maps.Marker({
-            position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },
-            map: map,
-            type: location.attributes.IMPACTYPE,
-            details: location.attributes.ACCLASS,
-            age: location.attributes.INVAGE,
-            dateTime: location.attributes.DATE,
-            factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},
-            neighbourhood: location.attributes.Hood_Name,
-            ward: location.attributes.Ward_Name
+  var bikeLayer = new google.maps.BicyclingLayer();
+  var bikeRoute = document.getElementById('bike_route');
+  var bikeDisplayed = false
 
-          });
-        });
+  bikeRoute.addEventListener('click', function(e) {
+    e.preventDefault()
+    setMapOnAll(null) 
 
+    deleteMarkers()
+    console.log('deletemarkers');
+    
+    if (bikeDisplayed === false ) {
+        bikeLayer.setMap(map);
+        bikeDisplayed = true
+    }else {
+        bikeLayer.setMap(null);
+        bikeDisplayed = false
+    }
+  })
+}
 
-        // Add a marker clusterer to manage the markers.
-  var markerCluster = new MarkerClusterer(map, markers,
-            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
->>>>>>> 74b6dab054f7a1316a6703f886d3a943a66db581
-
-    var bikeLayer = new google.maps.BicyclingLayer();
-
-    var bikeRoute = document.getElementById('bike_route');
-    var bikeDisplayed = false
-
-    markers.forEach(function(marker) {
-
-      var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h4 id="firstHeading" class="firstHeading">'+ 'Collision Details'+'</h4>'+
-      '<div id="bodyContent">'+
-      '<p>'+ 'Type: ' + marker.type  + '</p>'+
-      '<p>'+ 'Details: ' + marker.details  + '</p>'+
-      '<p>'+ 'Age Range: ' + marker.age  + '</p>'+
-      '<p>'+ 'Date, Time: ' + marker.dateTime  + '</p>'+
-      '<p>'+ 'Factors: ' + ''  + '</p>'+
-      '<p>'+ 'Neigbourhood: ' + marker.neighbourhood  + '</p>'+
-      '<p>'+ 'Ward: ' + marker.ward  + '</p>'+
-      '<p></p>'+
-      '</div>'+
-      '</div>';
-
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
-
-      marker.addListener('click', function() {
-        infowindow.open(map, marker);
-      });
+function addMarker(locations) {
+  console.log('start addmarker');
+  
+  for (var i = 0; i < locations.length; i++) {
+      
+    var marker = new google.maps.Marker({
+        position: { lat: locations[i].attributes.LATITUDE, lng: locations[i].attributes.LONGITUDE },
+        map: map,
+        type: locations[i].attributes.IMPACTYPE,
+        details: locations[i].attributes.ACCLASS,
+        age: locations[i].attributes.INVAGE,
+        dateTime: locations[i].attributes.DATE,
+        factors: {speed: locations[i].attributes.SPEEDING, Age: locations[i].attributes.AG_DRIV, redLight: locations[i].attributes.REDLIGHT, alcohol: locations[i].attributes.ALCOHOL},
+        neighbourhood: locations[i].attributes.Hood_Name,
+        ward: locations[i].attributes.Ward_Name
+    });
+    markers.push(marker);
+  };
+  console.log(markers);
+  
+}
 
 
-    })
 
-    bikeRoute.addEventListener('click', function(e) {
-        e.preventDefault()
-        if (bikeDisplayed === false ) {
-            bikeLayer.setMap(map);
-            bikeDisplayed = true
-        }else {
-            bikeLayer.setMap(null);
-            bikeDisplayed = false
-        }
-    })
+  function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
+    }
+    }
+  
+
+  // Removes the markers from the map, but keeps them in the array.
+  function clearMarkers() {
+    setMapOnAll(null);
+    // console.log(markers);
+    // console.log(locations);
+    
+    
   }
 
+  // Shows any markers currently in the array.
+  function showMarkers() {
+    
+    setMapOnAll(map);
+  }
+
+  // Deletes all markers in the array by removing references to them.
+  function deleteMarkers() {
+    locations = []
+    markers = [];
+    clearMarkers();
+
+  }
 
 
 // ======================== Filter Functions ==========================
@@ -250,12 +223,16 @@ function fatalities(data) {
 
 }
 
-function reset(data) {
+function reset() {
+console.log('reset');
 
-  locations = data.features
-  pedestriansFilter.checked = false;
-  cyclistsFilter.checked    = false;
-  injuriesFilter.checked    = false;
-  fatalitiesFilter.checked  = false;
+//   pedestriansFilter.checked = false;
+//   cyclistsFilter.checked    = false;
+//   injuriesFilter.checked    = false;
+//   fatalitiesFilter.checked  = false;
+//   console.log(markers);
+//  markers.setMap(null)
+addMarker(locations)
+showMarkers()
 
 }
