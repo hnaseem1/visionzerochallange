@@ -82,11 +82,13 @@ nav a {
   padding: 0.5em 2em;
 }
 
+.sub-header, .filter-title {
+  font-size: 0.8em;
+}
+
 .sub-header {
   background: #2a6ddf;
   color: #fff;
-
-  font-size: 1em;
   font-weight: 600;
   margin: 0;
   padding: 0.5em 2em;
@@ -94,14 +96,13 @@ nav a {
 
 .filter-title {
   background: #fff;
-  font-size: 1em;
   font-weight: 600;
   margin: 0;
   padding: 0.5em 2em;
 }
 
 .filter-options {
-  font-size: 0.8em;
+  font-size: 0.7em;
   font-weight: normal;
   margin: 0;
   padding-left: 2.5em;
@@ -123,6 +124,7 @@ nav a {
 .info {
   border: none;
   background: inherit;
+  padding: 0;
 }
 /* info bubble */
 .info-content {
