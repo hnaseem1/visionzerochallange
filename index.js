@@ -573,7 +573,7 @@ function initMap() {
       '<div id="siteNotice">'+
       '</div>'+
       '<h4 id="firstHeading" class="firstHeading">'+ 'Collision Details'+'</h4>'+
-      '<div id="bodyContent">'+
+      '<div class="bodyContent">'+
       '<p>'+ 'Type: ' + marker.type  + '</p>'+
       '<p>'+ 'Details: ' + marker.details  + '</p>'+
       '<p>'+ 'Age Range: ' + marker.age  + '</p>'+

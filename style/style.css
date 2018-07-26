@@ -162,6 +162,19 @@ input {
   border-radius: 0;
 }
 
+/* marker info bubbles */
+.firstHeading {
+  background: #2a6ddf;
+  color: #fff;
+  padding: 0.5em;
+  width: 100%;
+}
+.info-content {
+  
+}
+.bodyContent {
+  padding: 0 1em;
+}
 
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
