@@ -71,10 +71,15 @@ nav a {
 .filters {
   /* padding: 2em; */
   background: #eeeeee;
+  border-right: 2px solid #ddd;
 }
 
 .filter-criteria {
   padding: 0.75em 0.75em 0.15em 1em;
+}
+
+.date-range {
+  padding: 0.5em 2em;
 }
 
 .sub-header {
@@ -100,18 +105,80 @@ nav a {
   font-weight: normal;
   margin: 0;
   padding-left: 2.5em;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: auto;
 }
 
+.filter-options.title {
+  font-weight: 700;
+  padding-left: 1em;
+}
 
 .filter-options span {
   padding-left: 1em;
 }
+
+.info {
+  border: none;
+  background: inherit;
+}
+/* info bubble */
+.info-content {
+  background: #fff;
+  border: 1px solid #aaa;
+  font-size: 12px;
+  font-weight: 500;
+  left: 32%;
+  padding: 1em;
+  position: fixed;
+  width: 20em;
+  z-index: 100;
+}
+
+.info-content:after {
+  content: '';
+  position: absolute;
+	left: 0;
+	top: 50%;
+	border: 48px solid transparent;
+	border-right-color: #fff;
+	border-left: 1px solid #aaa;
+	border-top: 1px solid #aaa;
+	margin-top: -24px;
+	margin-left: -48px;
+}
+
+.collisions-info {
+  display: none;
+  top: 130px;
+}
+
+.contributing-factors-info {
+  display: none;
+  top: 475px;
+}
+
 
 /* checkboxes */
 input {
   border-radius: 0;
 }
 
+/* marker info bubbles */
+.firstHeading {
+  background: #2a6ddf;
+  color: #fff;
+  padding: 0.5em;
+  width: 100%;
+}
+.info-content {
+
+}
+.bodyContent {
+  padding: 0 1em;
+}
 
 /* Always set the map height explicitly to define the size of the div
 * element that contains the map. */
@@ -123,4 +190,5 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+  overflow: hidden;
 }
