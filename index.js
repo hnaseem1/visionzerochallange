@@ -1,17 +1,26 @@
+
+var masterlist = []
+var filterlist = []
 var response = $.ajax({
   url: 'https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json',
   method: 'GET',
   dataType: 'json'
 }).done(function(data) {
 
-  reset(data);
+  masterlist = data.features
+  filterlist = data.features
+  reset(data)
   initMap();
 
   //----------------------------- filters ----------------------------- //
+  var allcollisions           = document.querySelector("input[value='allcollisions']");
+
   var pedestriansFilter       = document.querySelector("input[value='pedestrians']");
   var cyclistsFilter          = document.querySelector("input[value='cyclists']");
   var motorcyclesFilter       = document.querySelector("input[value='motorcycles']");
   var motoristsFilter         = document.querySelector("input[value='motorists']");
+
+  var allfactors              = document.querySelector("input[value='allfactors']");
 
   var aggressiveDrivingFilter = document.querySelector("input[value='aggresive-driving']");
   var alcoholFilter           = document.querySelector("input[value='alcohol']");
@@ -26,256 +35,107 @@ var response = $.ajax({
   var map
   var markers = []
 
-  // pedestrians
+
+  allcollisions.addEventListener('change', function() {
+
+    pedestriansFilter.checked         = false;
+    cyclistsFilter.checked            = false;
+    motorcyclesFilter.checked         = false;
+    motoristsFilter.checked           = false;
+    aggressiveDrivingFilter.checked   = false;
+    alcoholFilter.checked             = false;
+    speedingFilter.checked            = false;
+    ranRedLightFilter.checked         = false;
+    roadClosuresConstruction.checked  = false;
+    majorCulturalEvent.checked        = false;
+    filters()
+  })
+  
   pedestriansFilter.addEventListener('change', function() {
-    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (cyclistsFilter.checked === true) {
-        cyclists(data)
-      }
-      if (motorcyclesFilter.checked === true) {
-        motorcycles(data)
-      }
-      if (motoristsFilter.checked == true) {
-        motorists(data)
-      }
-      pedestrians(data)
-    } else if (this.checked !== true) {
-      locations = []
-      if (pedestriansFilter.checked === true) {
-        pedestrians(data)
-      }
-      if (motorcyclesFilter.checked === true) {
-        motorcycles(data)
-      }
-      if (motoristsFilter.checked == true) {
-        motorists(data)
-      }
-    }
-    initMap();
+    allcollisions.checked = false,
+    filters()
   })
-  // cyclists
+
   cyclistsFilter.addEventListener('change', function() {
-    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (pedestriansFilter.checked === true) {
-        pedestrians(data)
-      }
-      if (motorcyclesFilter.checked === true) {
-        motorcycles(data)
-      }
-      if (motoristsFilter.checked == true) {
-        motorists(data)
-      }
-      motorists(data)
-    } else if (this.checked !== true) {
-      locations = []
-      if (pedestriansFilter.checked === true) {
-        pedestrians(data)
-      }
-      if (motorcyclesFilter.checked === true) {
-        motorcycles(data)
-      }
-      if (motoristsFilter.checked == true) {
-        motorists(data)
-      }
-    }
-    initMap();
+    allcollisions.checked = false,
+    filters()
   })
-  // motorcycles
+
   motorcyclesFilter.addEventListener('change', function() {
-    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (pedestriansFilter.checked === true) {
-        pedestrians(data)
-      }
-      if (cyclistsFilter.checked === true) {
-        cyclists(data)
-      }
-      if (motoristsFilter.checked == true) {
-        motorists(data)
-      }
-      motorcycles(data)
-    } else if (this.checked !== true) {
-      locations = []
-      if (pedestriansFilter.checked === true) {
-        pedestrians(data)
-      }
-      if (cyclistsFilter.checked === true) {
-        cyclists(data)
-      }
-      if (motorcyclesFilter.checked == true) {
-        pedestrians(data)
-      }
-    }
-    initMap();
+    allcollisions.checked = false,
+    filters()
   })
-  // motorists
+
   motoristsFilter.addEventListener('change', function() {
-    if (!this.checked && cyclistsFilter.checked !== true && motorcyclesFilter.checked !== true && motoristsFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (pedestriansFilter.checked === true) {
-        pedestrians(data)
-      }
-      if (cyclistsFilter.checked === true) {
-        cyclists(data)
-      }
-      if (motorcyclesFilter.checked == true) {
-        pedestrians(data)
-      }
-      motorists(data)
-    } else if (this.checked !== true) {
-      locations = []
-      if (pedestriansFilter.checked === true) {
-        pedestrians(data)
-      }
-      if (cyclistsFilter.checked === true) {
-        cyclists(data)
-      }
-      if (motorcyclesFilter.checked == true) {
-        pedestrians(data)
-      }
-    }
-    initMap();
+    allcollisions.checked = false,
+    filters()
   })
 
-  // aggressive driving
+
+
+  allfactors.addEventListener('change', function() {
+
+    aggressiveDrivingFilter.checked   = false;
+    alcoholFilter.checked             = false;
+    speedingFilter.checked            = false;
+    ranRedLightFilter.checked         = false;
+    roadClosuresConstruction.checked  = false;
+    majorCulturalEvent.checked        = false;
+
+    filters()
+
+  })
+
   aggressiveDrivingFilter.addEventListener('change', function() {
-    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (alcoholFilter.checked === true) {
-        alcohol(data)
-      }
-      if (speedingFilter.checked === true) {
-        speeding(data)
-      }
-      if (ranRedLightFilter.checked === true) {
-        ranRedLight(data)
-      }
-      aggressiveDriving(data);
-    } else if (this.checked !== true) {
-      locations = []
-      if (alcoholFilter.checked === true) {
-        alcohol(data)
-      }
-      if (speedingFilter.checked === true) {
-        speeding(data)
-      }
-      if (ranRedLightFilter.checked === true) {
-        ranRedLight(data)
-      }
-    }
-    initMap();
-  })
-  // alcohol
-  alcoholFilter.addEventListener('change', function() {
-    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (aggressiveDrivingFilter.checked === true) {
-        aggressiveDriving(data)
-      }
-      if (speedingFilter.checked === true) {
-        speeding(data)
-      }
-      if (ranRedLightFilter.checked === true) {
-        ranRedLight(data)
-      }
-      alcohol(data);
-    } else if (this.checked !== true) {
-      locations = []
-      if (alcoholFilter.checked === true) {
-        alcohol(data)
-      }
-      if (speedingFilter.checked === true) {
-        speeding(data)
-      }
-      if (ranRedLightFilter.checked === true) {
-        ranRedLight(data)
-      }
-    }
-    initMap();
-  })
-  // speeding
-  speedingFilter.addEventListener('change', function() {
-    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (aggressiveDrivingFilter.checked === true) {
-        alcohol(data)
-      }
-      if (alcoholFilter.checked === true) {
-        alcohol(data)
-      }
-      if (ranRedLightFilter.checked === true) {
-        ranRedLight(data)
-      }
-      speeding(data);
-    } else if (this.checked !== true) {
-      locations = []
-      if (aggressiveDrivingFilter.checked === true) {
-        alcohol(data)
-      }
-      if (alcoholFilter.checked === true) {
-        alcohol(data)
-      }
-      if (ranRedLightFilter.checked === true) {
-        ranRedLight(data)
-      }
-    }
-    initMap();
-  })
-  // ran red light
-  ranRedLightFilter.addEventListener('change', function() {
-    if (!this.checked && alcoholFilter.checked !== true && speedingFilter.checked !== true && ranRedLightFilter.checked !== true) {
-      locations = []
-      reset(data)
-    } else if (this.checked) {
-      locations = []
-      if (aggressiveDrivingFilter.checked === true) {
-        aggressiveDriving(data)
-      }
-      if (alcoholFilter.checked === true) {
-        alcohol(data)
-      }
-      if (speedingFilter.checked === true) {
-        speeding(data)
-      }
-      ranRedLight(data);
-    } else if (this.checked !== true) {
-      locations = []
-      if (aggressiveDrivingFilter.checked === true) {
-        aggressiveDriving(data)
-      }
-      if (alcoholFilter.checked === true) {
-        alcohol(data)
-      }
-      if (speedingFilter.checked === true) {
-        speeding(data)
-      }
-    }
-    initMap();
+    allfactors.checked = false,
+    filters()
   })
 
+  alcoholFilter.addEventListener('change', function() {
+    allfactors.checked = false,
+    filters()
+  })
+
+  speedingFilter.addEventListener('change', function() {
+    allfactors.checked = false,
+    filters()
+  })
+
+  roadClosuresConstruction.addEventListener('change', function() {
+    allfactors.checked = false,
+    filters()
+  })
+
+function filters () {
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
   // reset filter
   resetFilter.addEventListener('click', function() {
     console.log('filter reset')
@@ -300,261 +160,12 @@ function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
           zoom: 11,
           center: {lat: 43.713783, lng: -79.385296},
-          styles: [
-      {
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#f5f5f5"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.icon",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#616161"
-          }
-        ]
-      },
-      {
-        "elementType": "labels.text.stroke",
-        "stylers": [
-          {
-            "color": "#f5f5f5"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.land_parcel",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#bdbdbd"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.locality",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "administrative.neighborhood",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#eeeeee"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "poi",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#757575"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.business",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#e5e5e5"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#ebedeb"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "labels.text",
-        "stylers": [
-          {
-            "visibility": "simplified"
-          }
-        ]
-      },
-      {
-        "featureType": "poi.park",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#9e9e9e"
-          }
-        ]
-      },
-      {
-        "featureType": "road",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#ffffff"
-          }
-        ]
-      },
-      {
-        "featureType": "road.arterial",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#757575"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#dadada"
-          }
-        ]
-      },
-      {
-        "featureType": "road.highway",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#616161"
-          }
-        ]
-      },
-      {
-        "featureType": "road.local",
-        "elementType": "labels",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "road.local",
-        "elementType": "labels.text.fill",
-        "stylers": [
-          {
-            "color": "#9e9e9e"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.station",
-        "stylers": [
-          {
-            "visibility": "off"
-          }
-        ]
-      },
-      {
-        "featureType": "transit.station",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#eeeeee"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry",
-        "stylers": [
-          {
-            "color": "#c9c9c9"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "geometry.fill",
-        "stylers": [
-          {
-            "color": "#d3dbdb"
-          }
-        ]
-      },
-      {
-        "featureType": "water",
-        "elementType": "labels.text.fill",
-        "stylers": [
-
-      {
-            "color": "#9e9e9e"
-          }
-        ]
-      }
-      ]
+          styles: [{"elementType":"geometry","stylers":[{"color":"#f5f5f5"}]},{"elementType":"labels.icon","stylers":[{"visibility":"off"}]},{"elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"elementType":"labels.text.stroke","stylers":[{"color":"#f5f5f5"}]},{"featureType":"administrative.land_parcel","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.land_parcel","elementType":"labels.text.fill","stylers":[{"color":"#bdbdbd"}]},{"featureType":"administrative.locality","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"administrative.neighborhood","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"poi","elementType":"labels.text","stylers":[{"visibility":"off"}]},{"featureType":"poi","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"poi.business","stylers":[{"visibility":"off"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#e5e5e5"}]},{"featureType":"poi.park","elementType":"geometry.fill","stylers":[{"color":"#ebedeb"}]},{"featureType":"poi.park","elementType":"labels.text","stylers":[{"visibility":"simplified"}]},{"featureType":"poi.park","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"road","elementType":"geometry","stylers":[{"color":"#ffffff"}]},{"featureType":"road.arterial","elementType":"labels.text.fill","stylers":[{"color":"#757575"}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#dadada"}]},{"featureType":"road.highway","elementType":"labels.text.fill","stylers":[{"color":"#616161"}]},{"featureType":"road.local","elementType":"labels","stylers":[{"visibility":"off"}]},{"featureType":"road.local","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]},{"featureType":"transit.station","stylers":[{"visibility":"off"}]},{"featureType":"transit.station","elementType":"geometry","stylers":[{"color":"#eeeeee"}]},{"featureType":"water","elementType":"geometry","stylers":[{"color":"#c9c9c9"}]},{"featureType":"water","elementType":"geometry.fill","stylers":[{"color":"#d3dbdb"}]},{"featureType":"water","elementType":"labels.text.fill","stylers":[{"color":"#9e9e9e"}]}]
         });
 
-        // Add some markers to the map.
-        // Note: The code uses the JavaScript Array.prototype.map() method to
-        // create an array of markers based on a given "locations" array.
-        // The map() method here has nothing to do with the Google Maps API.
-  var image = 'assets/Automobile-Orange-Circle.svg'
-  var markers = locations.map(function(location, i) {
-          return new google.maps.Marker({
-            position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },             map: map,
-             type: location.attributes.IMPACTYPE,             details: location.attributes.ACCLASS,             age: location.attributes.INVAGE,             dateTime: location.attributes.DATE,             factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},             neighbourhood: location.attributes.Hood_Name,             ward: location.attributes.Ward_Name,
-            icon: image
-
-          });
-        });
+        addMarker(filterlist)
+        
+ 
 
 
   //       // Add a marker clusterer to manage the markers.
@@ -608,107 +219,64 @@ function initMap() {
   }
 
 
-// ======================== Filter Functions ==========================
+  function addMarker(location) {
 
-// pedestrians
+    var image = 'assets/Automobile-Orange-Circle.svg'
+    var markers = locations.map(function(location, i) {
+      return new google.maps.Marker({
+        position: { lat: location.attributes.LATITUDE, lng: location.attributes.LONGITUDE },   map: map,
+          type: location.attributes.IMPACTYPE,             details: location.attributes.ACCLASS,             age: location.attributes.INVAGE,          dateTime: location.attributes.DATE,             factors: {speed: location.attributes.SPEEDING, Age: location.attributes.AG_DRIV, redLight: location.attributes.REDLIGHT, alcohol: location.attributes.ALCOHOL},             neighbourhood: location.attributes.Hood_Name,             ward: location.attributes.Ward_Name,
+        icon: image
+      });
+      markers.push(marker);
+    });
+  }
 
-function pedestrians(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.PEDESTRIAN === 'Yes') {
-      locations.push(feature)
+  // Sets the map on all markers in the array.
+  function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+      markers[i].setMap(map);
     }
-  })
-}
+  }
 
-// cyclists
+  // Removes the markers from the map, but keeps them in the array.
+  function clearMarkers() {
+    setMapOnAll(null);
+  }
 
-function cyclists(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.CYCLIST === 'Yes') {
-      locations.push(feature)
-    }
-  })
-}
+  // Shows any markers currently in the array.
+  function showMarkers() {
+    setMapOnAll(map);
+  }
 
-// injuries
+  // Deletes all markers in the array by removing references to them.
+  function deleteMarkers() {
+    clearMarkers();
+    markers = [];
+  }
 
-function motorcycles(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.INJURY !== ' ') {
-      locations.push(feature)
-    }
-  })
-}
 
-// fatalities
 
-function fatalities(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.FATAL_NO > 0) {
-      locations.push(feature)
-    }
-  })
-}
 
-// motorcycles
 
-function motorcycles(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.MOTORCYCLE !== ' ') {
-      locations.push(feature)
-    }
-  })
-}
 
-// motorists
 
-function motorists(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.AUTOMOBILE !== ' ') {
-      locations.push(feature)
-    }
-  })
-}
 
-// aggressive driving
 
-function aggressiveDriving(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.AG_DRIV !== ' ') {
-      locations.push(feature)
-    }
-  })
-}
 
-// alcohol
 
-function alcohol(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.ALCOHOL !== ' ') {
-      locations.push(feature)
-    }
-  })
-}
 
-// speeding
 
-function speeding(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.SPEEDING !== ' ') {
-      locations.push(feature)
-    }
-  })
-}
 
-// ran red light
 
-function ranRedLight(data) {
-  data.features.map(function(feature) {
-    if (feature.attributes.REDLIGHT !== ' ') {
-      locations.push(feature)
-    }
-  })
-}
+
+
+
+
+
+
+
+
 
 
 // reset data
