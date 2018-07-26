@@ -78,6 +78,10 @@ nav a {
   padding: 0.75em 0.75em 0.15em 1em;
 }
 
+.date-range {
+  padding: 0.5em 2em;
+}
+
 .sub-header {
   background: #2a6ddf;
   color: #fff;
@@ -170,7 +174,7 @@ input {
   width: 100%;
 }
 .info-content {
-  
+
 }
 .bodyContent {
   padding: 0 1em;
