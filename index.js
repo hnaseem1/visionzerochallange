@@ -745,6 +745,9 @@ var contributingFactorsInfo = document.querySelector('.contributing-factors-info
 info[0].addEventListener('click', function(e) {
   e.preventDefault()
   console.log('info button 1 clicked')
+  var topPosition = e.clientY + 'px'
+  console.log(topPosition)
+  // collisionsInfo.style.top = topPosition;
   if (collisionsInfo.style.display == 'block') {
     collisionsInfo.style.display = 'none'
   } else {
@@ -755,6 +758,9 @@ info[0].addEventListener('click', function(e) {
 info[1].addEventListener('click', function(e) {
   e.preventDefault()
   console.log('info button 2 clicked')
+  var topPosition = e.clientY + 'px'
+  console.log(topPosition)
+  // contributingFactorsInfo.style.top = topPosition;
   if (contributingFactorsInfo.style.display === 'block') {
     contributingFactorsInfo.style.display = 'none'
   } else {
