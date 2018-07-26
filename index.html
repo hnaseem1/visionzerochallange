@@ -37,6 +37,22 @@
             <h3 class="filter-title">Collision Resulting in Fatality or Serious Injury</h3>
         		<div class="filter-criteria collision-type">
         			<h5>
+                <p>
+                  <label class="filter-options title">
+                    <input type="checkbox" name="collisions"/>
+                    <span>All Collisions</span>
+                    <span>
+                      <button class="info">
+                        <img src="/assets/alert-circle-i.svg" alt="">
+                        <div class="info-content collisions-info">
+                          <p>This dataset from the Toronto Police Service’s Open Data Portal includes all traffic collisions where a person was either killed or seriously injured (KSI) from 2007-2017.</p>
+                          <p>Pedestrians, school children, older adults, cyclists, and motorcyclists make up six of the seven emphasis areas outlined in the City of Toronto’s Vision Zero Road Safety Plan.</p>
+                          <p>Pedestrian and bicycle data can be filtered by  “all ages”, “School Children” (ages 4-19), and “Older Adults” (over the age of 55).</p>
+                        </div>
+                      </button>
+                    </span>
+                  </label>
+                </p>
                 <p><label class="filter-options"><input type="radio" name="accidents" value="pedestrians" ><span>🚶 ‍‍Pedestrians</span></label></p>
                 <p><label class="filter-options"><input type="radio" name="accidents" value="cyclists"    ><span>🚲 Cyclists</span></label></p>
                 <p><label class="filter-options"><input type="radio" name="accidents"  value="motorcycles" ><span> 🏍️ Motorcyles</span></label></p>
@@ -51,6 +67,19 @@
             <h3 class="filter-title">Contributing Factors Recorded by Toronto Police</h3>
         		<div class="filter-criteria contributing-factors">
         			<h5>
+                <p>
+                  <label class="filter-options title">
+                    <input type="checkbox" name="contributing-factors">
+                    <span>All Contributing Factors</span>
+                    <span>
+                      <input class="info" type="image" src="/assets/alert-circle-i.svg">
+                      <div class="info-content contributing-factors-info">
+                        <p>The collision data (KSI) provided on the Toronto Police Service’s Open Data Portal includes a record of the factors that were determined by the police to have played a role in each of the collisions. This filter allows the collision data to be sorted by these contributing factors.</p>
+                        <p>“Aggressive Driving” is one of the seven emphasis areas outlined in the City of Toronto’s Vision Zero Road Safety Plan. </p>
+                      </div>
+                    </span>
+                  </label>
+                </p>
                 <p><label class="filter-options"><input type="radio" name="factors" value="aggresive-driving" ><span> 😡 Aggressive Driving</span></label></p>
                 <p><label class="filter-options"><input type="radio" name="factors" value="alcohol"    ><span> 🍸 Alcohol</span></label></p>
                 <p><label class="filter-options"><input type="radio" name="factors" value="speeding"  ><span> 💨 Speeding</span></label></p>

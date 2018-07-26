@@ -568,12 +568,12 @@ function initMap() {
 
 
     markers.forEach(function(marker) {
-      
+
       var contentString = '<div id="content">'+
       '<div id="siteNotice">'+
       '</div>'+
       '<h4 id="firstHeading" class="firstHeading">'+ 'Collision Details'+'</h4>'+
-      '<div id="bodyContent">'+
+      '<div class="bodyContent">'+
       '<p>'+ 'Type: ' + marker.type  + '</p>'+
       '<p>'+ 'Details: ' + marker.details  + '</p>'+
       '<p>'+ 'Age Range: ' + marker.age  + '</p>'+
@@ -735,3 +735,29 @@ function openTab(evt, tabName) {
 
 
 }
+
+// info button
+
+var info                    = document.querySelectorAll('.info')
+var collisionsInfo          = document.querySelector('.collisions-info')
+var contributingFactorsInfo = document.querySelector('.contributing-factors-info')
+
+info[0].addEventListener('click', function(e) {
+  e.preventDefault()
+  console.log('info button 1 clicked')
+  if (collisionsInfo.style.display == 'block') {
+    collisionsInfo.style.display = 'none'
+  } else {
+    collisionsInfo.style.display = 'block'
+  }
+})
+
+info[1].addEventListener('click', function(e) {
+  e.preventDefault()
+  console.log('info button 2 clicked')
+  if (contributingFactorsInfo.style.display === 'block') {
+    contributingFactorsInfo.style.display = 'none'
+  } else {
+    contributingFactorsInfo.style.display = 'block'
+  }
+})
