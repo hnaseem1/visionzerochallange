@@ -51,7 +51,8 @@ nav a {
   background: #a8bbff;
   border: none;
   font-weight: 600;
-  width: 49%;
+  width: 45%;
+  margin: 0 0.5em;
 }
 
 .tablinks.active {
