@@ -348,7 +348,7 @@ resetFilter.addEventListener('click', function() {
 
 
 
-      if (location[i].attributes.PEDESTRIAN !== 'Yes') {
+      if (location[i].attributes.PEDESTRIAN !== ' ') {
 
         marker.icon = images[3]
 
@@ -364,7 +364,7 @@ resetFilter.addEventListener('click', function() {
 
         marker.icon = images[0]
 
-      } 
+      }
 
       markers.push(marker);
     };
