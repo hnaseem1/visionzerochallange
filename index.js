@@ -164,6 +164,7 @@ resetFilter.addEventListener('click', function() {
     deleteMarkers()
     filterlist = []
     result = []
+    resultpostsecondfilter = []
 
     for (let i = 0; i < masterlist.length; i++) {
       filterlist.push(masterlist[i])
@@ -230,48 +231,66 @@ resetFilter.addEventListener('click', function() {
         }
       }
     }
+    
+    if (result.length === 0) {
+      for (let i = 0; i < filterlist.length; i++) {
+        result.push(filterlist[i])        
+      }
+    }
 
     if (allfactors.checked) {
-      for (let i = 0; i < filterlist.length; i++) {
-        if (filterlist[i].attributes.AG_DRIV !== ' ' || filterlist[i].attributes.ALCOHOL !== ' ' || filterlist[i].attributes.SPEEDING !== ' ' || filterlist[i].attributes.REDLIGHT !== ' ') {
-          result.push(filterlist[i])
-          filterlist.splice(i, 1)
+      for (let i = 0; i < result.length; i++) {
+        if (result[i].attributes.AG_DRIV !== ' '){
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
+          
+        } else if (result[i].attributes.ALCOHOL !== ' ') {
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
+          console.log('1');
+
+        } else if (result[i].attributes.SPEEDING !== ' ') {
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
+        }else if (result[i].attributes.REDLIGHT !== ' ') {
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
         }
       }
     }
 
     if (aggressiveDrivingFilter.checked) {
-      for (let i = 0; i < filterlist.length; i++) {
-        if (filterlist[i].attributes.AG_DRIV !== ' ') {
-          result.push(filterlist[i])
-          filterlist.splice(i, 1)
+      for (let i = 0; i < result.length; i++) {
+        if (result[i].attributes.AG_DRIV !== ' ') {
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
         }
       }
     }
 
     if (alcoholFilter.checked) {
-      for (let i = 0; i < filterlist.length; i++) {
-        if (filterlist[i].attributes.ALCOHOL !== ' ') {
-          result.push(filterlist[i])
-          filterlist.splice(i, 1)
+      for (let i = 0; i < result.length; i++) {
+        if (result[i].attributes.ALCOHOL !== ' ') {
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
         }
       }
     }
 
     if (speedingFilter.checked) {
-      for (let i = 0; i < filterlist.length; i++) {
-        if (filterlist[i].attributes.SPEEDING !== ' ') {
-          result.push(filterlist[i])
-          filterlist.splice(i, 1)
+      for (let i = 0; i < result.length; i++) {
+        if (result[i].attributes.SPEEDING !== ' ') {
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
         }
       }
     }
 
     if (ranRedLightFilter.checked) {
-      for (let i = 0; i < filterlist.length; i++) {
-        if (filterlist[i].attributes.REDLIGHT !== ' ') {
-          result.push(filterlist[i])
-          filterlist.splice(i, 1)
+      for (let i = 0; i < result.length; i++) {
+        if (result[i].attributes.REDLIGHT !== ' ') {
+          resultpostsecondfilter.push(result[i])
+          result.splice(i, 1)
         }
       }
     }
@@ -281,9 +300,14 @@ resetFilter.addEventListener('click', function() {
         result.push(filterlist[i])
       }
     }
-    console.log(result.length);
 
-    addMarker(result)
+    if (resultpostsecondfilter.length !== 0){
+      addMarker(resultpostsecondfilter)
+      console.log(resultpostsecondfilter.length);
+    } else {
+      addMarker(result)
+      console.log(result.length);
+    }
   }
 
 
@@ -302,6 +326,8 @@ resetFilter.addEventListener('click', function() {
 
 
   function addMarker(location) {
+
+    markers = []
 
     var image = 'assets/Automobile-Orange-Circle.svg'
 
