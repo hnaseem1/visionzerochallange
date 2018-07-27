@@ -51,7 +51,8 @@ nav a {
   background: #a8bbff;
   border: none;
   font-weight: 600;
-  width: 49%;
+  width: 45%;
+  margin: 0 0.5em;
 }
 
 .tablinks.active {
@@ -132,7 +133,6 @@ nav a {
   border: 1px solid #aaa;
   font-size: 12px;
   font-weight: 500;
-  left: 32%;
   padding: 1em;
   position: fixed;
   width: 20em;

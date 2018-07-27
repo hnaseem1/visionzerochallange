@@ -397,23 +397,34 @@ function openTab(evt, tabName) {
   var collisionsInfo          = document.querySelector('.collisions-info')
   var contributingFactorsInfo = document.querySelector('.contributing-factors-info')
 
-  info[0].addEventListener('click', function(e) {
-    e.preventDefault()
-    console.log('info button 1 clicked')
-    if (collisionsInfo.style.display == 'block') {
-      collisionsInfo.style.display = 'none'
-    } else {
-      collisionsInfo.style.display = 'block'
-    }
-  })
 
-  info[1].addEventListener('click', function(e) {
-    e.preventDefault()
-    console.log('info button 2 clicked')
-    if (contributingFactorsInfo.style.display === 'block') {
-      contributingFactorsInfo.style.display = 'none'
-    } else {
-      contributingFactorsInfo.style.display = 'block'
-    }
-  })
-  })
+info[0].addEventListener('click', function(e) {
+  e.preventDefault()
+  console.log('info button 1 clicked')
+  var topPosition = (e.clientY - 110) + 'px'
+  console.log(topPosition)
+  var leftPosition = (e.clientX + 60) + 'px'
+  collisionsInfo.style.top = topPosition;
+  collisionsInfo.style.left = leftPosition;
+  if (collisionsInfo.style.display == 'block') {
+    collisionsInfo.style.display = 'none'
+  } else {
+    collisionsInfo.style.display = 'block'
+  }
+})
+
+info[1].addEventListener('click', function(e) {
+  e.preventDefault()
+  console.log('info button 2 clicked')
+  var topPosition = (e.clientY - 80) + 'px'
+  console.log(topPosition)
+  var leftPosition = (e.clientX + 60) + 'px'
+  contributingFactorsInfo.style.top = topPosition;
+  contributingFactorsInfo.style.left = leftPosition;
+  if (contributingFactorsInfo.style.display === 'block') {
+    contributingFactorsInfo.style.display = 'none'
+  } else {
+    contributingFactorsInfo.style.display = 'block'
+  }
+})
+
