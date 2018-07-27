@@ -231,10 +231,10 @@ resetFilter.addEventListener('click', function() {
         }
       }
     }
-    
+
     if (result.length === 0) {
       for (let i = 0; i < filterlist.length; i++) {
-        result.push(filterlist[i])        
+        result.push(filterlist[i])
       }
     }
 
@@ -243,7 +243,7 @@ resetFilter.addEventListener('click', function() {
         if (result[i].attributes.AG_DRIV !== ' '){
           resultpostsecondfilter.push(result[i])
           result.splice(i, 1)
-          
+
         } else if (result[i].attributes.ALCOHOL !== ' ') {
           resultpostsecondfilter.push(result[i])
           result.splice(i, 1)
@@ -328,8 +328,8 @@ resetFilter.addEventListener('click', function() {
   function addMarker(location) {
 
     markers = []
+    var images = ['assets/Automobile-Orange-Circle.svg','assets/Motorcycle-Purple-Circle.svg', 'assets/Bicycle-Cyan-Circle.svg', 'assets/Pedestrians-Magenta-Circle.svg']
 
-    var image = 'assets/Automobile-Orange-Circle.svg'
 
     for (var i = 0; i < location.length; i++) {
 
@@ -343,8 +343,29 @@ resetFilter.addEventListener('click', function() {
           factors: {speed: location[i].attributes.SPEEDING, Age: location[i].attributes.AG_DRIV, redLight: location[i].attributes.REDLIGHT, alcohol: location[i].attributes.ALCOHOL},
           neighbourhood: location[i].attributes.Hood_Name,
           ward: location[i].attributes.Ward_Name,
-          icon: image
+          icon: images[0],
       });
+
+
+
+      if (location[i].attributes.PEDESTRIAN !== 'Yes') {
+
+        marker.icon = images[3]
+
+      } else if (location[i].attributes.CYCLIST !== ' ') {
+
+        marker.icon = images[2]
+
+      } else if (location[i].attributes.MOTORCYCLE !== ' ') {
+
+        marker.icon = images[1]
+
+      } else if (location[i].attributes.AUTOMOBILE !== ' ') {
+
+        marker.icon = images[0]
+
+      } 
+
       markers.push(marker);
     };
     setMapOnAll(map)
@@ -352,33 +373,36 @@ resetFilter.addEventListener('click', function() {
 
   // Sets the map on all markers in the array.
   function setMapOnAll(map) {
-    for (var i = 0; i < markers.length; i++) {
 
-      var contentString = '<div id="content">'+
-      '<div id="siteNotice">'+
-      '</div>'+
-      '<h4 id="firstHeading" class="firstHeading">'+ 'Collision Details'+'</h4>'+
-      '<div class="bodyContent">'+
-      '<p>'+ 'Type: ' + markers[i].type  + '</p>'+
-      '<p>'+ 'Details: ' + markers[i].details  + '</p>'+
-      '<p>'+ 'Age Range: ' + markers[i].age  + '</p>'+
-      '<p>'+ 'Date, Time: ' + markers[i].dateTime  + '</p>'+
-      '<p>'+ 'Factors: ' + ''  + '</p>'+
-      '<p>'+ 'Neigbourhood: ' + markers[i].neighbourhood  + '</p>'+
-      '<p>'+ 'Ward: ' + markers[i].ward  + '</p>'+
-      '<p></p>'+
-      '</div>'+
-      '</div>';
+    markers.forEach(function(marker) {
 
-      var infowindow = new google.maps.InfoWindow({
-        content: contentString
-      });
+        var contentString = '<div id="content">'+
+        '<div id="siteNotice">'+
+        '</div>'+
+        '<h4 id="firstHeading" class="firstHeading">'+ 'Collision Details'+'</h4>'+
+        '<div class="bodyContent">'+
+        '<p>'+ 'Type: ' + marker.type  + '</p>'+
+        '<p>'+ 'Details: ' + marker.details  + '</p>'+
+        '<p>'+ 'Age Range: ' + marker.age  + '</p>'+
+        '<p>'+ 'Date, Time: ' + marker.dateTime  + '</p>'+
+        '<p>'+ 'Factors: ' + ''  + '</p>'+
+        '<p>'+ 'Neigbourhood: ' + marker.neighbourhood  + '</p>'+
+        '<p>'+ 'Ward: ' + marker.ward  + '</p>'+
+        '<p></p>'+
+        '</div>'+
+        '</div>';
 
-      markers[i].addListener('click', function() {
-        infowindow.open(map, markers[i]);
-      });
-      markers[i].setMap(map);
-    }
+        var infowindow = new google.maps.InfoWindow({
+          content: contentString
+        });
+
+        marker.addListener('click', function() {
+          infowindow.open(map, marker);
+        });
+        marker.setMap(map);
+    })
+
+
   }
 
   // Removes the markers from the map, but keeps them in the array.
