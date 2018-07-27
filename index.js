@@ -11,7 +11,7 @@ var response = $.ajax({
 }).done(function(data) {
 
   var masterlist = data.features
-  
+
   initMap();
   addMarker(masterlist);
 
@@ -57,7 +57,7 @@ var response = $.ajax({
     majorCulturalEvent.checked        = false;
     filters()
   })
-  
+
   year.addEventListener('change', function() {
     filters()
   })
@@ -129,12 +129,12 @@ var response = $.ajax({
 
   bikeRoute.addEventListener('click', function(e) {
     e.preventDefault()
-    
+
     if (bikeDisplayed === false ) {
         bikeLayer.setMap(map);
         bikeDisplayed = true
     }else {
-        bikeLayer.setMap(null);      
+        bikeLayer.setMap(null);
         bikeDisplayed = false
     }
   })
@@ -166,7 +166,7 @@ resetFilter.addEventListener('click', function() {
     result = []
 
     for (let i = 0; i < masterlist.length; i++) {
-      filterlist.push(masterlist[i])      
+      filterlist.push(masterlist[i])
     }
 
 
@@ -185,7 +185,7 @@ resetFilter.addEventListener('click', function() {
         }
       }
     }
-    
+
     if (allcollisions.checked) {
       for (let i = 0; i < filterlist.length; i++) {
       if (filterlist[i].attributes.PEDESTRIAN === 'Yes' || filterlist[i].attributes.CYCLIST === 'Yes' || filterlist[i].attributes.MOTORCYCLE === 'Yes' || filterlist[i].attributes.AUTOMOBILE === 'Yes') {
@@ -205,7 +205,7 @@ resetFilter.addEventListener('click', function() {
     }
 
     if (cyclistsFilter.checked) {
-      for (let i = 0; i < filterlist.length; i++) {        
+      for (let i = 0; i < filterlist.length; i++) {
         if (filterlist[i].attributes.CYCLIST === 'Yes') {
           result.push(filterlist[i])
           filterlist.splice(i, 1)
@@ -282,7 +282,7 @@ resetFilter.addEventListener('click', function() {
       }
     }
     console.log(result.length);
-    
+
     addMarker(result)
   }
 
@@ -297,7 +297,7 @@ resetFilter.addEventListener('click', function() {
     });
 
     bikeLayer = new google.maps.BicyclingLayer();
-          
+
   }
 
 
@@ -306,10 +306,10 @@ resetFilter.addEventListener('click', function() {
     var image = 'assets/Automobile-Orange-Circle.svg'
 
     for (var i = 0; i < location.length; i++) {
-      
+
       var marker = new google.maps.Marker({
         position: { lat: location[i].attributes.LATITUDE,
-          lng: location[i].attributes.LONGITUDE },   
+          lng: location[i].attributes.LONGITUDE },
           type: location[i].attributes.IMPACTYPE,
           details: location[i].attributes.ACCLASS,
           age: location[i].attributes.INVAGE,
@@ -366,7 +366,7 @@ resetFilter.addEventListener('click', function() {
   }
 
   // Deletes all markers in the array by removing references to them.
-  function deleteMarkers() {    
+  function deleteMarkers() {
     clearMarkers();
     markers = [];
   }
@@ -427,4 +427,4 @@ info[1].addEventListener('click', function(e) {
     contributingFactorsInfo.style.display = 'block'
   }
 })
-
+})
