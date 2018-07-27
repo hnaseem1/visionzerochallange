@@ -2,7 +2,7 @@
 var filterlist = []
 var result = []
 var markers = []
-
+var masterlist = []
 
 var response = $.ajax({
   url: 'https://services.arcgis.com/S9th0jAJ7bqgIRjw/arcgis/rest/services/KSI/FeatureServer/0/query?where=1%3D1&outFields=*&outSR=4326&f=json',
@@ -10,17 +10,18 @@ var response = $.ajax({
   dataType: 'json'
 }).done(function(data) {
 
+  var masterlist = data.features
   
+  initMap();
+  addMarker(masterlist);
+
+  //----------------------------- filters ----------------------------- //
+
   var bikeRoute = document.getElementById('bike_route');
   var bikeDisplayed = false
 
-  var masterlist = data.features
-  filterlist = data.features
-  initMap();
-  addMarker(filterlist);
+  var year                    = document.getElementById('selectYear')
 
-
-  //----------------------------- filters ----------------------------- //
   var allcollisions           = document.querySelector("input[value='allcollisions']");
 
   var pedestriansFilter       = document.querySelector("input[value='pedestrians']");
@@ -57,6 +58,10 @@ var response = $.ajax({
     filters()
   })
   
+  year.addEventListener('change', function() {
+    filters()
+  })
+
   pedestriansFilter.addEventListener('change', function() {
     allcollisions.checked = false,
     filters()
@@ -107,7 +112,17 @@ var response = $.ajax({
     filters()
   })
 
+  ranRedLightFilter.addEventListener('change', function() {
+    allfactors.checked = false,
+    filters()
+  })
+
   roadClosuresConstruction.addEventListener('change', function() {
+    allfactors.checked = false,
+    filters()
+  })
+
+  majorCulturalEvent.addEventListener('change', function() {
     allfactors.checked = false,
     filters()
   })
@@ -126,33 +141,59 @@ var response = $.ajax({
 
   // reset filter
 resetFilter.addEventListener('click', function() {
-  console.log('filter reset')
+  allcollisions.checked       = false
   pedestriansFilter.checked   = false;
   cyclistsFilter.checked      = false;
   motorcyclesFilter.checked   = false;
   motoristsFilter.checked     = false;
+  allfactors.checked          = false
   aggressiveDrivingFilter.checked  = false;
   alcoholFilter.checked       = false;
   speedingFilter.checked      = false;
   ranRedLightFilter.checked   = false;
   roadClosuresConstruction.checked  = false;
   majorCulturalEvent.checked  = false;
+  year.selectedIndex = 0
   deleteMarkers()
+  filters()
   })
 
 
   function filters () {
 
     deleteMarkers()
-    console.log(filterlist);
-
-    filterlist = masterlist
+    filterlist = []
     result = []
-    console.log(data.features);
 
-    if (allcollisions.checked) {
-      result = filterlist
+    for (let i = 0; i < masterlist.length; i++) {
+      filterlist.push(masterlist[i])      
     }
+
+
+    if (year.selectedIndex !== 0 ) {
+      var parcialresult = []
+
+      for (let i = 0; i < filterlist.length; i++) {
+        if (year.value === filterlist[i].attributes.YEAR.toString()) {
+          parcialresult.push(filterlist[i])
+        }
+      }
+      if (parcialresult.length !== 0) {
+        filterlist = []
+        for (let i = 0; i < parcialresult.length; i++) {
+          filterlist.push(parcialresult[i])
+        }
+      }
+    }
+    
+    if (allcollisions.checked) {
+      for (let i = 0; i < filterlist.length; i++) {
+      if (filterlist[i].attributes.PEDESTRIAN === 'Yes' || filterlist[i].attributes.CYCLIST === 'Yes' || filterlist[i].attributes.MOTORCYCLE === 'Yes' || filterlist[i].attributes.AUTOMOBILE === 'Yes') {
+        result.push(filterlist[i])
+        filterlist.splice(i, 1)
+      }
+    }
+  }
 
     if (pedestriansFilter.checked) {
       for (let i = 0; i < filterlist.length; i++) {
@@ -184,6 +225,15 @@ resetFilter.addEventListener('click', function() {
     if (motoristsFilter.checked) {
       for (let i = 0; i < filterlist.length; i++) {
         if (filterlist[i].attributes.AUTOMOBILE !== ' ') {
+          result.push(filterlist[i])
+          filterlist.splice(i, 1)
+        }
+      }
+    }
+
+    if (allfactors.checked) {
+      for (let i = 0; i < filterlist.length; i++) {
+        if (filterlist[i].attributes.AG_DRIV !== ' ' || filterlist[i].attributes.ALCOHOL !== ' ' || filterlist[i].attributes.SPEEDING !== ' ' || filterlist[i].attributes.REDLIGHT !== ' ') {
           result.push(filterlist[i])
           filterlist.splice(i, 1)
         }
@@ -226,6 +276,13 @@ resetFilter.addEventListener('click', function() {
       }
     }
 
+    if ( result.length === 0 ) {
+      for (let i = 0; i < filterlist.length; i++) {
+        result.push(filterlist[i])
+      }
+    }
+    console.log(result.length);
+    
     addMarker(result)
   }
 
@@ -242,7 +299,6 @@ resetFilter.addEventListener('click', function() {
     bikeLayer = new google.maps.BicyclingLayer();
           
   }
-
 
 
   function addMarker(location) {
@@ -335,29 +391,29 @@ function openTab(evt, tabName) {
 
 }
 
-// info button
+  // info button
 
-var info                    = document.querySelectorAll('.info')
-var collisionsInfo          = document.querySelector('.collisions-info')
-var contributingFactorsInfo = document.querySelector('.contributing-factors-info')
+  var info                    = document.querySelectorAll('.info')
+  var collisionsInfo          = document.querySelector('.collisions-info')
+  var contributingFactorsInfo = document.querySelector('.contributing-factors-info')
 
-info[0].addEventListener('click', function(e) {
-  e.preventDefault()
-  console.log('info button 1 clicked')
-  if (collisionsInfo.style.display == 'block') {
-    collisionsInfo.style.display = 'none'
-  } else {
-    collisionsInfo.style.display = 'block'
-  }
-})
+  info[0].addEventListener('click', function(e) {
+    e.preventDefault()
+    console.log('info button 1 clicked')
+    if (collisionsInfo.style.display == 'block') {
+      collisionsInfo.style.display = 'none'
+    } else {
+      collisionsInfo.style.display = 'block'
+    }
+  })
 
-info[1].addEventListener('click', function(e) {
-  e.preventDefault()
-  console.log('info button 2 clicked')
-  if (contributingFactorsInfo.style.display === 'block') {
-    contributingFactorsInfo.style.display = 'none'
-  } else {
-    contributingFactorsInfo.style.display = 'block'
-  }
-})
-})
+  info[1].addEventListener('click', function(e) {
+    e.preventDefault()
+    console.log('info button 2 clicked')
+    if (contributingFactorsInfo.style.display === 'block') {
+      contributingFactorsInfo.style.display = 'none'
+    } else {
+      contributingFactorsInfo.style.display = 'block'
+    }
+  })
+  })
