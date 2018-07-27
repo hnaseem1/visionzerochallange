@@ -39,7 +39,7 @@
         			<h5>
                 <p>
                   <label class="filter-options title">
-                    <input type="checkbox" name="collisions"/>
+                    <input type="checkbox" name="collisions" value="allcollisions"/>
                     <span>All Collisions</span>
                     <span>
                       <button class="info">
@@ -53,6 +53,7 @@
                     </span>
                   </label>
                 </p>
+                
                 <p>
                   <label class="filter-options">
                     <input type="radio" name="accidents" value="pedestrians" >
@@ -93,8 +94,8 @@
             <h3 class="sub-header">Filters</h3>
             <h3 class="filter-title">Date Range</h3>
             <div class="filter-criteria date-range">
-              <select>
-                <option value="">All Years</option>
+              <select id=selectYear>
+                <option value="Years">All Years</option>
                 <option value="2007">2007</option>
                 <option value="2008">2008</option>
                 <option value="2009">2009</option>
@@ -113,7 +114,7 @@
         			<h5>
                 <p>
                   <label class="filter-options title">
-                    <input type="checkbox" name="contributing-factors">
+                    <input type="checkbox" name="contributing-factors" value="allfactors">
                     <span>All Contributing Factors</span>
                     <span>
                       <input class="info" type="image" src="/assets/alert-circle-i.svg">
@@ -124,17 +125,17 @@
                     </span>
                   </label>
                 </p>
-                <p><label class="filter-options"><input type="radio" name="factors" value="aggresive-driving" ><span> 😡 Aggressive Driving</span></label></p>
-                <p><label class="filter-options"><input type="radio" name="factors" value="alcohol"    ><span> 🍸 Alcohol</span></label></p>
-                <p><label class="filter-options"><input type="radio" name="factors" value="speeding"  ><span> 💨 Speeding</span></label></p>
-                <p><label class="filter-options"><input type="radio" name="factors" value="ran-red-light"   ><span> 🚦 Ran Red Light</span></label></p>
+                <p><label class="filter-options"><input type="checkbox" name="factors" value="aggresive-driving" ><span> 😡 Aggressive Driving</span></label></p>
+                <p><label class="filter-options"><input type="checkbox" name="factors" value="alcohol"    ><span> 🍸 Alcohol</span></label></p>
+                <p><label class="filter-options"><input type="checkbox" name="factors" value="speeding"  ><span> 💨 Speeding</span></label></p>
+                <p><label class="filter-options"><input type="checkbox" name="factors" value="ran-red-light"   ><span> 🚦 Ran Red Light</span></label></p>
               </h5>
         		</div>
             <h3 class="filter-title">Predictive Indicators</h3>
         		<div class="filter-criteria predictive-indicators">
         			<h5>
-                <p><label class="filter-options"><input type="radio" name="indicators" value="road-closures-construction"><span> 🚧 Road Closures/Construction</span></label></p>
-                <p><label class="filter-options"><input type="radio" name="indicators" value="major-cultural-event" ><span> 🎭 Major Cultural/Sporting Event</span></label></p>
+                <p><label class="filter-options"><input type="checkbox" name="indicators" value="road-closures-construction"><span> 🚧 Road Closures/Construction</span></label></p>
+                <p><label class="filter-options"><input type="checkbox" name="indicators" value="major-cultural-event" ><span> 🎭 Major Cultural/Sporting Event</span></label></p>
 
               </h5>
         		</div>
