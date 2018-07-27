@@ -339,7 +339,7 @@ resetFilter.addEventListener('click', function() {
           type: location[i].attributes.IMPACTYPE,
           details: location[i].attributes.ACCLASS,
           age: location[i].attributes.INVAGE,
-          dateTime: location[i].attributes.DATE,
+          dateTime: location[i].attributes.YEAR.toString(),
           factors: {speed: location[i].attributes.SPEEDING, Age: location[i].attributes.AG_DRIV, redLight: location[i].attributes.REDLIGHT, alcohol: location[i].attributes.ALCOHOL},
           neighbourhood: location[i].attributes.Hood_Name,
           ward: location[i].attributes.Ward_Name,
@@ -384,8 +384,7 @@ resetFilter.addEventListener('click', function() {
         '<p>'+ 'Type: ' + marker.type  + '</p>'+
         '<p>'+ 'Details: ' + marker.details  + '</p>'+
         '<p>'+ 'Age Range: ' + marker.age  + '</p>'+
-        '<p>'+ 'Date, Time: ' + marker.dateTime  + '</p>'+
-        '<p>'+ 'Factors: ' + ''  + '</p>'+
+        '<p>'+ 'Year: ' + marker.dateTime  + '</p>'+
         '<p>'+ 'Neigbourhood: ' + marker.neighbourhood  + '</p>'+
         '<p>'+ 'Ward: ' + marker.ward  + '</p>'+
         '<p></p>'+
